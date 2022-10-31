@@ -1,0 +1,101 @@
+  <!-- BEGIN HEADER -->
+  <div role="navigation" class="navbar header no-margin">
+    <div class="container">
+        <div class="navbar-header">
+            <!-- BEGIN RESPONSIVE MENU TOGGLER -->
+            <button data-target=".navbar-collapse" data-toggle="collapse" class="navbar-toggle" type="button">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <!-- END RESPONSIVE MENU TOGGLER -->
+            <a routerLink="/homePage" class="navbar-brand"><img src="assets/img/logo_red.png" alt="Metronic Shop UI"></a><!-- LOGO -->
+        </div>
+        <!-- BEGIN CART -->
+        <div class="cart-block" *ngIf="isCart">
+            <div class="cart-info">
+                <a routerLink="javascript:void(0);" class="cart-info-count">{{totalNumber}} items</a>
+                <a routerLink="javascript:void(0);" class="cart-info-value">${{total}}</a>
+            </div>
+            <i class="fa fa-shopping-cart"></i>
+            <!-- BEGIN CART CONTENT -->
+            <div class="cart-content-wrapper">
+              <div class="cart-content">
+                <ul class="scroller" style="height: 250px;">
+                  <li *ngFor="let c of cart">
+                    <a routerLink="/product/{{c.products.proId}}"><img src="assets/img/photos/{{c.products.image}}" alt="Rolex Classic Watch" width="37" height="34"></a>
+                    <span class="cart-content-count">x {{c.subtotal}}</span>
+                    <strong><a routerLink="item.html">{{c.products.proName}}</a></strong>
+                    <em>${{c.products.sale_price*c.subtotal}}</em>
+                    <a href="javascript:void(0);" (click)="onDelete(c)"onclick="return confirm('Ban co chac muon xoa ko?')" class="del-goods"><i class="fa fa-times"></i></a>
+                  </li>
+                </ul>
+                <div class="text-right">
+                  <a routerLink="/cart" class="btn btn-default">View Cart</a>
+                  <a routerLink="/checkout" class="btn btn-primary">Checkout</a>
+                </div>
+              </div>
+            </div>
+            <!-- END CART CONTENT -->
+        </div>
+        <div class="cart-block" *ngIf="!isCart">
+          <div class="cart-info">
+                <a routerLink="javascript:void(0);" class="cart-info-count">{{totalNumber}} items</a>
+                <a routerLink="javascript:void(0);" class="cart-info-value">${{total}}</a>
+            </div>
+            <i class="fa fa-shopping-cart"></i>
+        </div>
+        <!-- END CART -->
+        <!-- BEGIN NAVIGATION -->
+        <div class="collapse navbar-collapse mega-menu">
+            <ul class="nav navbar-nav">
+              <li><a routerLink="/homePage">Home</a></li>
+                <li class="dropdown">
+                  <a class="dropdown-toggle" data-toggle="dropdown" data-delay="0" data-close-others="false" data-target="product-list.html" routerLink="/products">
+                    Product 
+                    <i class="fa fa-angle-down"></i>
+                  </a>
+                  <!-- BEGIN DROPDOWN MENU -->
+                  <ul class="dropdown-menu" aria-labelledby="mega-menu">
+                    <li>
+                      <div class="nav-content">
+                        <!-- BEGIN DROPDOWN MENU - COLUMN -->
+                        <h3>Smartphone</h3>
+                        <div class="nav-content-col" *ngFor="let cate of category">
+                          
+                          <ul>
+                            <li >
+                              <a routerLink="/product/{{cate.cateId}}">{{cate.cateName}}</a>
+                            </li>
+                          </ul>
+                        </div>
+                      </div>
+                    </li>
+                  </ul>
+                  <!-- END DROPDOWN MENU -->
+                </li>
+                <li><a routerLink="/about">About</a></li>
+                <li><a routerLink="/contacts">Contacts</a></li>
+                <!-- BEGIN TOP SEARCH -->
+                <li class="menu-search">
+                    <span class="sep"></span>
+                    <i class="fa fa-search search-btn"></i>
+                    <div class="search-box">
+                        <form action="#">
+                            <div class="input-group">
+                                <input type="text" placeholder="Search" class="form-control">
+                                <span class="input-group-btn">
+                                    <button class="btn btn-primary" type="submit">Search</button>
+                                </span>
+                            </div>
+                        </form>
+                    </div> 
+                </li>
+                <!-- END TOP SEARCH -->
+            </ul>
+        </div>
+        <!-- END NAVIGATION -->
+    </div>
+</div>
+<!-- END HEADER -->

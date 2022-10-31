@@ -1,0 +1,87 @@
+
+<app-pre-header></app-pre-header>
+<div class="main">
+    <div class="container">
+      <!-- BEGIN SIDEBAR & CONTENT -->
+      <div class="row margin-bottom-40">
+        <!-- BEGIN CONTENT -->
+        <div class="col-md-12 col-sm-12">
+          <h1>Order details</h1>
+          <div class="shopping-cart-page">
+            <div class="shopping-cart-data clearfix">
+              <div class="table-wrapper-responsive">
+                <table summary="Shopping cart">
+                    <tr>
+                      <th class="shopping-cart-image">Image:</th>
+                       <td class="shopping-cart-ref-no" *ngFor="let c of ordersdetails">
+                        <img src="assets/img/photos/{{c.product.image}}" alt="" width="120px" height="120px">
+                      </td>
+                    </tr>
+                    <tr>
+                      <th class="shopping-cart-description">Product name:</th>
+                      <td class="shopping-cart-ref-no" *ngFor="let c of ordersdetails">
+                       {{c.product.proName}}
+                     </td>
+                    </tr>
+                    <tr>
+                      <th class="shopping-cart-description">Full name:</th>
+                       <td class="shopping-cart-ref-no">
+                        {{fullName}}
+                      </td>
+                    </tr>
+                    <tr>
+                      <th class="shopping-cart-ref-no">Address:</th>
+                      <td >
+                        <div>
+                            {{address}}
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <th class="shopping-cart-ref-no">Phone:</th>
+                        <td class="shopping-cart-ref-no">
+                            {{phone}}
+                        </td>
+                    </tr>
+                    <tr>
+                      <th class="shopping-cart-quantity">Date of order</th>
+                      <td class="shopping-cart-ref-no">
+                        {{orders.dateofset | date:'dd/MM/yyyy'}}
+                      </td>
+                    </tr>
+                    <tr>
+                      <th class="shopping-cart-ref-no">Status: </th>
+                      <td class="shopping-cart-ref-no" *ngIf="status.statusid ==1">
+                        <span style="color:blue ;">{{status.statusname}} </span>  
+                        </td>
+                        <td class="shopping-cart-ref-no" *ngIf="status.statusid ==2">
+                          <span style="color: #F3A936;">{{status.statusname}} </span>  
+                        </td>
+                          <td class="shopping-cart-ref-no" *ngIf="status.statusid ==3">
+                            <span style="color: green;">{{status.statusname}} </span>  
+                          </td>
+                          <td *ngIf="status.statusid ==4">
+                            <span style="color: red;">{{status.statusname}} </span>  
+                          </td>
+                    </tr>
+                    <tr>
+                      <div class="form-actions"> 
+                        <td>                          
+                           <button type="button" class="btn default" (click)="back()">Back</button>  
+                        </td> 
+                        <td>
+                           <button type="submit" (click)="onDelete()"onclick="return confirm('Are you sure cacncel order?')" class="btn red">Cancel order</button> 
+                        </td>                                
+                        </div>
+                    </tr>
+                  </table>
+              </div>
+          </div>
+        </div>
+        <!-- END CONTENT -->
+      </div>
+      <!-- END SIDEBAR & CONTENT -->
+    </div>
+  </div>
+<app-pre-footer></app-pre-footer>
+

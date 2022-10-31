@@ -1,0 +1,45 @@
+    <!-- BEGIN TOP BAR -->
+    <div class="pre-header">
+      <div class="container">
+          <div class="row">
+              <!-- BEGIN TOP BAR LEFT PART -->
+              <div class="col-md-6 col-sm-6 additional-shop-info">
+                  <ul class="list-unstyled list-inline">
+                      <li><i class="fa fa-phone"></i><span>+84 949 8358 06</span></li>
+                      <!-- BEGIN LANGS -->
+                      <li class="langs-block">
+                          <a routerLink="javascript:void(0);" class="current">English <i class="fa fa-angle-down"></i></a>
+                          <div class="langs-block-others-wrapper"><div class="langs-block-others">
+                            <a routerLink="javascript:void(0);">Viernamese</a>
+                          </div></div>
+                      </li>
+                      <!-- END LANGS -->
+                  </ul>
+              </div>
+              <!-- END TOP BAR LEFT PART -->
+              <!-- BEGIN TOP BAR MENU -->
+              <div class="col-md-6 col-sm-6 additional-nav">
+                  <ul class="list-unstyled list-inline pull-right">
+                      <li><a routerLink="/myAccount">My Account</a></li>
+                      <li><a routerLink="/wishList">Wish list</a></li>
+                      <li *ngIf="!isLoggedIn">
+                        <a routerLink="/signin">Log In</a>
+                      </li>
+                      
+                  </ul>
+                  <ul class="list-unstyled list-inline pull-right"*ngIf="isLoggedIn" >
+                    <li>
+                      <a routerLink="#">{{username}}</a>
+                    </li>
+                    <li>
+                      <a routerLink="#" (click)="logout()">Logout |</a>
+                    </li>
+                  </ul>
+              </div>
+              <!-- END TOP BAR MENU -->
+          </div>
+      </div>        
+  </div>
+  <!-- END TOP BAR -->
+
+<app-navbar></app-navbar>

@@ -1,0 +1,76 @@
+<div class="wrapper">
+    <app-nav-menu></app-nav-menu>
+    <div class="main">
+        <app-header></app-header>
+<main class="content">
+    <div class="container-fluid p-0">
+
+        <div class="mb-3">
+            <h1 class="h3 d-inline align-middle">Category</h1>
+        </div>
+
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div id="datatables-fixed-header_wrapper" class="dataTables_wrapper dt-bootstrap5 no-footer">
+                            <div class="row">
+                                <div class="col-sm-12 col-md-6">
+                                    <div class="dataTables_length" id="datatables-fixed-header_length">
+                                        <a routerLink="/admin/categoryCreate" class="btn btn-primary">Insert category</a>
+                                    </div></div>
+                        <div class="col-sm-12 col-md-6">
+                            <div id="datatables-fixed-header_filter" class="dataTables_filter">
+                                <label>Search:
+                                    <input type="search" class="form-control form-control-sm" placeholder="" aria-controls="datatables-fixed-header"[(ngModel)]="searchedKeyword">
+                                </label>
+                            </div>
+                        </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12">
+                            <br>
+                            
+                            <table id="datatables-fixed-header" class="table table-striped dataTable no-footer" style="width: 100%;" aria-describedby="datatables-fixed-header_info"><thead>
+                                <tr>
+                                    <th (click)="sort('proId')" class="sorting sorting_asc" tabindex="0" aria-controls="datatables-fixed-header" rowspan="1" colspan="1" aria-label="Name: activate to sort column descending" style="width: 171.288px;" aria-sort="ascending">Category Id</th>
+                                    <th  tabindex="0" aria-controls="datatables-fixed-header" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 260.875px;">Name</th>
+                                    <th  tabindex="0" aria-controls="datatables-fixed-header" rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending" style="width: 267.7875px;">Status</th>
+                                    <th colspan="2" rowspan="2">#</th>
+                                </tr>
+                            </thead>
+                            
+                            <tbody>  
+                                <tr *ngFor="let cate of category |orderBy:key:reserve | filter:searchedKeyword | paginate
+                                : {
+                                    itemsPerPage: tableSize,
+                                    currentPage: page,
+                                    totalItems: count
+                                  };
+                            let i = index">
+                                    <td>{{cate.cateId}}</td>
+                                    <td>{{cate.cateName}}</td>
+                                    <td>{{cate.status == true ? "active" : "inactive"}}</td>
+                                    <td><a [routerLink]="['/admin/categoryEdit/', cate.cateId]" class="btn btn-sm btn-success"><i class="fa fa-pen-to-square"></i></a></td>
+                                    <td><a href="javascript:void()"(click)="onDelete(cate.cateId)" onclick="return confirm('Ban co chac muon xoa ko?')" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i></a></td>
+                                </tr>
+                            </tbody>
+                        </table></div></div><div class="row">
+                            <div class="col-sm-12 col-md-5">
+                                <div class="dataTables_info" id="datatables-fixed-header_info" role="status" aria-live="polite">Showing 1 to 25 of 57 entries</div>
+                            </div>
+                            <div class="d-flex justify-content-center">
+                            <pagination-controls previousLabel="Prev" nextLabel="Next" (pageChange)="onTableDataChange($event)">
+                            </pagination-controls>
+                        </div>
+                    </div>
+                </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</main>
+</div>
+</div>

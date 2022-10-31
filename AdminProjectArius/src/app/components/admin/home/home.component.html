@@ -1,0 +1,80 @@
+<div class="wrapper">
+    <app-nav-menu></app-nav-menu>
+    <div class="main">
+        <app-header></app-header>
+
+        <main class="content">
+            <div class="container-fluid p-0" *ngIf="isLoggedIn">
+
+                <h1 class="h3 mb-3"><strong>Welcome! </strong> {{username}}</h1>
+
+            </div>
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="card text-white bg-primary mb-3" style="max-width: 18rem;">
+                        
+                        <div class="card-body">
+                            <h1 style="color: #fff;">{{categories}}</h1>
+                            <p class="card-text">Category</p>                         
+                        </div>
+                        <div class="card-footer bg-transparent border-success">
+                            <a routerLink="/admin/category"style="color: #fff;">Xem chi tiết</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card text-dark bg-warning mb-3" style="max-width: 18rem;">
+                        
+                        <div class="card-body">
+                            <h1 style="color: #fff;">{{products}}</h1>
+                            <p class="card-text"style="color: #fff;">Product</p>
+                        </div>
+                        <div class="card-footer bg-transparent border-success">
+                            <a routerLink="/admin/product"style="color: #fff;">Xem chi tiết</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card text-white bg-success mb-3" style="max-width: 18rem;">
+                        
+                        <div class="card-body">
+                            <h1 style="color: #fff;">{{orders}}</h1>
+                            <p class="card-text">Orders</p>
+                        </div>
+                        <div class="card-footer bg-transparent border-success">
+                            <a routerLink="/admin/order"style="color: #fff;">Xem chi tiết</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card text-white bg-danger mb-3" style="max-width: 18rem;">
+                        
+                        <div class="card-body">
+                            <h1 style="color: #fff;">{{users}}</h1>
+                            <p class="card-text">Users</p>
+                        </div>
+                        <div class="card-footer bg-transparent border-success">
+                            <a routerLink="/admin/user"style="color: #fff;">Xem chi tiết</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card text-white bg-secondary mb-3" style="max-width: 18rem;">
+                        <div class="card-body">
+                          <h1 style="color: #fff;">{{comments}}</h1>
+                          <p class="card-text">Comment</p>
+                        </div>
+                        <div class="card-footer bg-transparent border-success">
+                            <a routerLink="/admin/comment"style="color: #fff;">Xem chi tiết</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+        </main>
+
+        <app-footer></app-footer>
+    </div>
+</div>

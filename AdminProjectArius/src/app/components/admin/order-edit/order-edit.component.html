@@ -1,0 +1,76 @@
+<div class="wrapper">
+    <app-nav-menu></app-nav-menu>
+    <div class="main">
+        <app-header></app-header>
+<main class="content">
+    <div class="container-fluid p-0">
+
+        <div class="mb-3">
+            <h1 class="h3 d-inline align-middle">Edit order</h1>
+        </div>
+        <div class="row">
+<div class="col-md-12">
+    <div class="card">
+        <div class="card-body">
+            <form method="post" #formEditstatus="ngForm" (ngSubmit)="onUpdate()" >
+                <!-- <div *ngFor="let pro of produc.pro"> -->
+                    <div class="mb-3">
+                        <label class="form-label">Order id:</label>
+                        <input type="text" class="form-control" name="orderid" readonly placeholder="Order id" [(ngModel)]="order.orderid" >
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Full Name:</label>
+                        <input type="text" class="form-control" name="fullName" readonly placeholder="Full name" [(ngModel)]="order.fullName">
+                    </div>
+                    <div class="row">
+                        <div class="mb-3 col-md-6">
+                            <label class="form-label" for="inputEmail4">Email:</label>
+                            <input type="email" class="form-control" name="email"readonly  placeholder="Email"  [(ngModel)]="email">
+                        </div>
+                        <div class="mb-3 col-md-6">
+                            <label class="form-label" for="inputPassword4">Phone:</label>
+                            <input type="number" class="form-control" name="phone"readonly  placeholder="Phone"  [(ngModel)]="phone"> 
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="mb-3 col-md-6">
+                            <label class="form-label" for="inputEmail4">Address:</label>
+                            <input type="text" class="form-control" name="address" readonly placeholder="Address"[(ngModel)]="address">
+                        </div>
+                        <div class="mb-3 col-md-6">
+                            <label class="form-label" for="inputPassword4">Note:</label>
+                            <input type="text" class="form-control" name="note" readonly placeholder="Note" [(ngModel)]="order.note">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <label class="form-label" for="inputEmail4">Delivery:</label>
+                        <div *ngIf="order.delivery ==true">
+                            <input type="text" class="form-control" readonly value="Online">
+                        </div>
+                        <div *ngIf="order.delivery ==false">
+                            <input type="text" class="form-control" readonly value="Cash On Delivery">
+                            
+                         </div>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label" for="inputPassword4">Status:</label>
+                        <select name="status" #myCateElem class="form-select mb-3" [value]="statusOrder" >
+                            
+                            <option 
+                            *ngFor="let s of status"
+                            [value]="s.statusid"
+                            >
+                            {{s.statusname}}
+                            </option>
+                        </select>
+                    </div>
+                <!-- </div> -->
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+        </div>
+    </div>
+</div>
+</div>
+</div>
+</main>
+</div>  

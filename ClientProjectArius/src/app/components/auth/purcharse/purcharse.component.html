@@ -1,0 +1,77 @@
+
+<app-pre-header></app-pre-header>
+<div class="main">
+    <div class="container">
+      <!-- BEGIN SIDEBAR & CONTENT -->
+      <div class="row margin-bottom-40">
+        <!-- BEGIN CONTENT -->
+        <div class="col-md-12 col-sm-12">
+          <h1>Order history</h1>
+          <div class="shopping-cart-page">
+            <div class="shopping-cart-data clearfix">
+              <div class="table-wrapper-responsive" *ngIf="isOrder">
+              <table summary="Shopping cart">
+                <tr>
+                  <th class="shopping-cart-image">Order id:</th>
+                  <th class="shopping-cart-description">Full name:</th>
+                  <th class="shopping-cart-description">Phone:</th>
+                  <th class="shopping-cart-description">Address:</th>
+                  <th class="shopping-cart-quantity">Date of order</th>
+                  <th class="shopping-cart-price">Delivery</th>
+                  <th class="shopping-cart-price">Status</th>
+                  <th class="shopping-cart-total">Details</th>
+                </tr>
+                <tr *ngFor="let o of order">
+                  <td class="shopping-cart-ref-no">
+                    {{o.orderid}}
+                  </td>
+                  <td class="shopping-cart-ref-no">
+                    {{o.user.fullName}}
+                  </td>
+                  <td class="shopping-cart-ref-no">
+                    {{o.user.phone}}
+                  </td>
+                  <td class="shopping-cart-ref-no">
+                    {{o.user.address}}
+                  </td>
+                  <td class="shopping-cart-ref-no">
+                    {{o.dateofset | date:'dd/MM/yyyy'}}
+                  </td>
+                  <td class="shopping-cart-ref-no" *ngIf="o.delivery ==true">
+                    <span style="color: red;">Online </span>  
+                    </td>
+                    <td class="shopping-cart-ref-no" *ngIf="o.delivery ==false">
+                      <span style="color: green;">Cash on delivery </span>  
+                    </td>
+                  <td class="shopping-cart-ref-no" *ngIf="o.status.statusid ==1">
+                  <span style="color:blue ;">{{o.status.statusname}} </span>  
+                  </td>
+                  <td class="shopping-cart-ref-no" *ngIf="o.status.statusid ==2">
+                    <span style="color: #F3A936;">{{o.status.statusname}} </span>  
+                  </td>
+                    <td class="shopping-cart-ref-no" *ngIf="o.status.statusid ==3">
+                      <span style="color: green;">{{o.status.statusname}} </span>  
+                    </td>
+                    <td *ngIf="o.status.statusid ==4">
+                      <span style="color: red;">{{o.status.statusname}} </span>  
+                    </td>
+
+                  <td class="del-goods-col">
+                    <a routerLink="/orderDetails/{{o.orderid}}"><i class="fa fa-eye"></i></a>
+                  </td>
+                </tr>
+              </table>
+              </div>
+              <div class="table-wrapper-responsive" *ngIf="!isOrder">
+                <div class="shopping-cart-data clearfix">
+                  <p>Your order is empty!</p>
+                </div>
+              </div>
+          </div>
+        </div>
+        <!-- END CONTENT -->
+      </div>
+      <!-- END SIDEBAR & CONTENT -->
+    </div>
+  </div>
+<app-pre-footer></app-pre-footer>

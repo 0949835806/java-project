@@ -1,0 +1,126 @@
+<app-pre-header></app-pre-header>
+<div class="main">
+    <div class="container">
+      <!-- BEGIN SIDEBAR & CONTENT -->
+      <div class="row margin-bottom-40">
+        <!-- BEGIN CONTENT -->
+        <div class="col-md-12 col-sm-12">
+          <h1>Shopping cart</h1>
+          <div class="shopping-cart-page" *ngIf="isCart">
+            <div class="shopping-cart-data clearfix">
+              <div class="table-wrapper-responsive">
+              <table summary="Shopping cart">
+                <tr>
+                  <th class="shopping-cart-image">Image</th>
+                  <th class="shopping-cart-description">Product name:</th>
+                  <th class="shopping-cart-ref-no">Product id:</th>
+                  <th class="shopping-cart-quantity">Quantity</th>
+                  <th class="shopping-cart-price">Unit price</th>
+                  <th class="shopping-cart-total" colspan="2">Total</th>
+                </tr>
+                <tr *ngFor="let c of cart">
+                  <td class="shopping-cart-image">
+                    <a routerLink="/productDetails/{{c.products.proId}}"><img src="assets/img/photos/{{c.products.image}}" alt="Berry Lace Dress"></a>
+                  </td>
+                  <td class="shopping-cart-description">
+                    <h3><a routerLink="/productDetails/{{c.products.proId}}">{{c.products.proName}}</a></h3>
+                    <p>More info is here</p>
+                  </td>
+                  <td class="shopping-cart-ref-no">
+                    {{c.products.proId}}
+                  </td>
+                  <td class="shopping-cart-quantity">
+                    <div class="product-quantity">
+                    <div class="input-group bootstrap-touchspin input-group-sm">
+                      <span class="input-group-btn">
+                        <button class="btn quantity-down bootstrap-touchspin-down minus" type="button" (click)="desQty(c)">
+                          <i class="fa fa-angle-down"></i>
+                        </button>
+                      </span>
+                      <span class="input-group-addon bootstrap-touchspin-prefix" style="display: none;"></span>
+                      <input id="product-quantity" type="number" readonly="" class="form-control input-sm" style="display: block;" value="{{c.subtotal}}"
+                      [(ngModel)]="c.subtotal" step="1" max=""  name="subtotal" id="subtotal">  
+                      <span class="input-group-addon bootstrap-touchspin-postfix" style="display: none;"></span>
+                      <span class="input-group-btn">
+                        <button class="btn quantity-up bootstrap-touchspin-up plus" type="button" (click)="incQty(c)">
+                          <i class="fa fa-angle-up"></i>
+                        </button>
+                      </span>
+                    </div>
+                    </div>
+                  </td>
+                  <td class="shopping-cart-price">
+                    <strong><span>$</span>{{c.products.sale_price}}</strong>
+                  </td>
+                  <td class="shopping-cart-total">
+                    <strong><span>$</span>{{c.subtotal * c.products.sale_price}}</strong>
+                  </td>
+                  <td class="del-goods-col">
+                    <a class="del-goods" id="cart-item" href="javascript:void()" (click)="onDelete(c)"onclick="return confirm('Ban co chac muon xoa ko?')"><i class="fa fa-times"></i></a>
+                  </td>
+                </tr>
+              </table>
+              </div>
+
+              <div class="shopping-total">
+                <ul>
+                  <li>
+                    <em>Sub total</em>
+                    <strong class="price"><span>$</span>{{total}}</strong>
+                  </li>
+                  <li>
+                    <em>Shipping cost</em>
+                    <strong class="price"><span>$</span>3.00</strong>
+                  </li>
+                  <li class="shopping-total-price">
+                    <em>Total</em>
+                    <strong class="price"><span>$</span>{{total + 300}}</strong>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <button class="btn btn-default" type="submit">Continue shopping <i class="fa fa-shopping-cart"></i></button>
+            <button class="btn btn-warning" type="submit" (click)="clearCart()">Clear cart </button>
+            <button class="btn btn-primary" type="submit" (click)="checkoutCart()">Checkout <i class="fa fa-check"></i></button>
+          </div>
+          <div class="shopping-cart-page" *ngIf="!isCart">
+            <div class="shopping-cart-data clearfix">
+              <p>Your shopping cart is empty!</p>
+            </div>
+          </div>
+        </div>
+        <!-- END CONTENT -->
+      </div>
+      <!-- END SIDEBAR & CONTENT -->
+
+      <!-- BEGIN SIMILAR PRODUCTS -->
+      <div class="row margin-bottom-40">
+        <div class="col-md-12 col-sm-12 bxslider-wrapper bxslider-wrapper-similar-products">
+          <h2>Most popular products</h2>
+            <div class="bx-wrapper" style="max-width: 1200px;">
+              <div class="bx-viewport" style="width: 100%; position: relative; height: 330px;">
+                <ul class="bxslider bxslider-similar-products" data-slides-phone="1" data-slides-tablet="2" data-slides-desktop="4" data-slide-margin="20" style="width: 815%; position: relative; transition-duration: 0s; ">
+                  <li style="float: left; list-style: none; position: relative; width: 270px; margin-right: 20px;" class="bx-clone" *ngFor="let p of productSale.slice(0, 4)">
+                    <div class="product-item">
+                      <div class="pi-img-wrapper">
+                        <img src="assets/img/photos/{{p.image}}" class="img-responsive" alt="Berry Lace Dress">
+                        <div>
+                          <a routerLink="#" (click)="addToWishList(p)" class="btn btn-default fancybox-button">Like</a>
+                          <a routerLink="/productDetails/{{p.proId}}" class="btn btn-default fancybox-fast-view">View</a>
+                        </div>
+                      </div>
+                      <h3><a routerLink="/productDetails/{{p.proId}}">{{p.proName}}</a></h3>
+                      <div class="pi-price">${{p.sale_price}}</div>
+                      <a href="#" class="btn btn-default add2cart" (click)="addToCart(p)">Add to cart</a>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            </div>
+        </div>
+
+      </div>
+      <!-- END SIMILAR PRODUCTS -->
+    </div>
+  </div>
+<app-pre-footer></app-pre-footer>

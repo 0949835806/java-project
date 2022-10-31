@@ -1,0 +1,153 @@
+<app-pre-header></app-pre-header>
+    <div class="main">
+        <div class="container">
+          <ul class="breadcrumb">
+              <li><a routerLink="/homepage">Home</a></li>
+              <li><a routerLink="/product">Store</a></li>
+              <li class="active">Checkout</li>
+          </ul>
+          <!-- BEGIN SIDEBAR & CONTENT -->
+          <div class="row margin-bottom-40">
+            <!-- BEGIN CONTENT -->
+            <div class="col-md-12 col-sm-12">
+              <h1>Checkout</h1>
+              <!-- BEGIN CHECKOUT PAGE -->
+              <div class="panel-group checkout-page accordion scrollable" id="checkout-page" *ngIf="isLoggin">
+                
+                <!-- BEGIN PAYMENT ADDRESS B2 -->
+                <div id="payment-address" class="panel panel-default">
+                  <div class="panel-heading">
+                    <h2 class="panel-title">
+                      <a data-toggle="collapse" id="tab-content" data-parent="#checkout-page" href="#payment-address-content" class="accordion-toggle">
+                        Step 1: Account &amp; Billing Details
+                      </a>
+                    </h2>
+                  </div>
+                  <div id="payment-address-content" class="panel-collapse collapse collapse in">
+                      <div class="panel-body row">
+                        <div class="col-md-6 col-sm-6">
+                          <h3>Your Personal Details</h3>
+                          <div class="form-group">
+                            <label for="fullname">Full Name <span class="require">*</span></label>
+                            <input type="text" id="fullName" name="fullName"  class="form-control" [(ngModel)]="user.fullName" readonly>
+                          </div>
+                          <div class="form-group">
+                            <label for="lastname">User Name <span class="require">*</span></label>
+                            <input type="text" id="username" name="username" class="form-control" [(ngModel)]="user.username" readonly>
+                          </div>
+                          <div class="form-group">
+                            <label for="email">E-Mail <span class="require">*</span></label>
+                            <input type="email" id="email" name="email" class="form-control" [(ngModel)]="user.email" readonly>
+                          </div>
+                          <div class="radio-list">
+                            <label for="delivery-comments">Delivery: </label>
+                            <br>
+                            <label>
+                              <input type="radio" name="CashOnDelivery" value="true" name="delivery" #myCateElen required> Cash On Delivery
+                            </label>
+                            <label>
+                              <input type="radio" name="CashOnDelivery" value="false" name="delivery" #myCateElen required> Online
+                            </label>
+                          </div>
+                        </div>
+                        <div class="col-md-6 col-sm-6">
+                          <h3>Your Address</h3>
+                          <div class="form-group">
+                            <label for="address">Address</label>
+                            <input type="text" id="address" name="address" class="form-control" [(ngModel)]="user.address" readonly>
+                          </div> 
+                          <div class="form-group">
+                            <label for="phone">Phone <span class="require">*</span></label>
+                            <input type="text" id="phone" name="phone" class="form-control" [(ngModel)]="user.phone" readonly>
+                          </div>
+                          <div class="form-group">
+                            <label for="delivery-comments">Note </label>
+                            <textarea name="note" id="delivery-comments" class="form-control" #myCateElem rows="8"></textarea>
+                          </div>
+                        </div>
+                        <hr>
+                        <div class="col-md-12">                      
+                          <button class="btn btn-primary  pull-right" type="submit" data-toggle="collapse" data-parent="#checkout-page" data-target="#confirm-content" id="button-payment-address">Continue</button>
+                          <div class="checkbox pull-left">
+                            <label>
+                              <a title="Privacy Policy" routerLink="/userEdit/{{user.userid}}">Change your personal details</a>
+                            </label>
+                          </div>                        
+                        </div>
+                      </div>
+                  </div>
+                </div>
+                <!-- END PAYMENT ADDRESS -->
+                <!-- BEGIN CONFIRM LAST FORM-->
+                <div id="confirm" class="panel panel-default">
+                  <div class="panel-heading">
+                    <h2 class="panel-title">
+                      <a data-toggle="collapse" data-parent="#checkout-page" href="#confirm-content" class="accordion-toggle">
+                        Step 2: Confirm Order
+                      </a>
+                    </h2>
+                  </div>
+                  <div id="confirm-content" class="panel-collapse collapse" *ngIf="isCart">
+                    <div class="panel-body row">
+                      <div class="col-md-12 clearfix">
+                        <div class="table-wrapper-responsive">
+                        <table>
+                          <tr>
+                            <th class="checkout-image">Image</th>
+                            <th class="checkout-description">Description</th>
+                            <th class="checkout-model">Model</th>
+                            <th class="checkout-quantity">Quantity</th>
+                            <th class="checkout-price">Price</th>
+                            <th class="checkout-total">Total</th>
+                          </tr>
+                          <tr *ngFor="let c of cart"> 
+                            <td class="checkout-image">
+                              <a routerLink="javascript:;"><img src="assets/img/photos/{{c.products.image}}" alt="{{c.products.proName}}"></a>
+                            </td>
+                            <td class="checkout-description">
+                              <h3><a routerLink="javascript:;">{{c.products.proName}}</a></h3>
+                            </td>
+                            <td class="checkout-model">{{c.products.proId}}</td>
+                            <td class="checkout-quantity">{{c.subtotal}}</td>
+                            <td class="checkout-price"><strong><span>$</span>{{c.products.sale_price}}</strong></td>
+                            <td class="checkout-total"><strong><span>$</span>{{c.subtotal * c.products.sale_price}}</strong></td>
+                          </tr>
+                        </table>
+                        </div>
+                        <div class="checkout-total-block">
+                          <ul>
+                            <li>
+                              <em>Sub total</em>
+                              <strong class="price"><span>$</span>{{total}}</strong>
+                            </li>
+                            <li>
+                              <em>Shipping cost</em>
+                              <strong class="price"><span>$</span>3.00</strong>
+                            </li>
+                            <li>
+                              <em>VAT (17.5%)</em>
+                              <strong class="price"><span>$</span>3.00</strong>
+                            </li>
+                            <li class="checkout-total-price">
+                              <em>Total</em>
+                              <strong class="price" #myTotalElem><span>$</span>{{total + 600}}</strong>
+                            </li>
+                          </ul>
+                        </div>
+                        <div class="clearfix"></div>
+                        <button class="btn btn-primary pull-right" type="submit" (click)="insertOrder()"  id="button-confirm">Confirm Order</button>
+                        <button type="button" class="btn btn-default pull-right margin-right-20">Cancel</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- END CONFIRM -->
+              </div>
+              <!-- END CHECKOUT PAGE -->
+            </div>
+            <!-- END CONTENT -->
+          </div>
+          <!-- END SIDEBAR & CONTENT -->
+        </div>
+      </div>
+<app-pre-footer></app-pre-footer>

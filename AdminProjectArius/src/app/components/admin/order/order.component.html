@@ -1,0 +1,101 @@
+<div class="wrapper">
+    <app-nav-menu></app-nav-menu>
+    <div class="main">
+        <app-header></app-header>
+<main class="content">
+    <div class="container-fluid p-0">
+
+        <div class="mb-3">
+            <h1 class="h3 d-inline align-middle">Order</h1>
+        </div>
+
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div id="datatables-fixed-header_wrapper" class="dataTables_wrapper dt-bootstrap5 no-footer">
+                            <div class="row">
+                                <div class="col-sm-12 col-md-6">
+                                    <div class="dataTables_length" id="datatables-fixed-header_length">
+                                        
+                                    </div>
+                                </div>
+                                <div class="col-sm-12 col-md-6"><div id="datatables-fixed-header_filter" class="dataTables_filter">
+                                    <label>Search:
+                                        <input type="search" class="form-control form-control-sm" placeholder="" aria-controls="datatables-fixed-header" [(ngModel)]="searchedKeyword">
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row"><div class="col-sm-12">
+                            <br>
+                            <table id="datatables-fixed-header" class="table table-striped dataTable no-footer" style="width: 100%;" aria-describedby="datatables-fixed-header_info"><thead>
+                                <tr>
+                                    <th (click)="sort('proId')" class="sorting sorting_asc" tabindex="0" aria-controls="datatables-fixed-header" rowspan="1" colspan="1" aria-label="Name: activate to sort column descending" style="width: 35.825px;" aria-sort="ascending">Order Id</th>
+                                    <th  tabindex="0" aria-controls="datatables-fixed-header" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 297.875px;">Full Name</th>
+                                    <th  tabindex="0" aria-controls="datatables-fixed-header" rowspan="1" colspan="1" aria-label="Age: activate to sort column ascending" style="width: 97.7875px;">Email</th>
+                                    <th  tabindex="0" aria-controls="datatables-fixed-header" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending" style="width: 97.7875px;">Phone</th>
+                                    <th  tabindex="0" aria-controls="datatables-fixed-header" rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending" style="width: 97.7875px;">Address</th>
+                                    <th  tabindex="0" aria-controls="datatables-fixed-header" rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending" style="width: 260.875px;">Date of order</th>
+                                    <th  tabindex="0" aria-controls="datatables-fixed-header" rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending" style="width: 97.7875px;">Total</th>
+                                    <th  tabindex="0" aria-controls="datatables-fixed-header" rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending" style="width: 297.7875px;">Status</th>
+                                    <th>#</th>
+                                </tr>
+                            </thead>
+                            
+                            <tbody>  
+                                <tr *ngFor="let o of order |orderBy:key:reserve | filter:searchedKeyword | paginate
+                                : {
+                                    itemsPerPage: tableSize,
+                                    currentPage: page,
+                                    totalItems: count
+                                  };
+                            let i = index">
+                                    <td>{{o.orderid}}</td>
+                                    <td>{{o.user.fullName}}</td>
+                                    <td>
+                                        {{o.user.email}}
+                                    </td>
+                                    <td>{{o.user.phone}}</td>
+                                    <td>{{o.user.address}}</td>
+                                    <td>
+                                        {{o.dateofset | date:'dd/MM/yyyy'}}
+                                    </td>
+                                    <td>{{o.delivery?"Online":"Cash On Delivery"}}</td>
+                                    <td *ngIf="o.status.statusid ==1">
+                                        <span style="color:blue ;">{{o.status.statusname}} </span>  
+                                        </td>
+                                        <td *ngIf="o.status.statusid ==2">
+                                          <span style="color: #F3A936;">{{o.status.statusname}} </span>  
+                                        </td>
+                                          <td *ngIf="o.status.statusid ==3">
+                                            <span style="color: green;">{{o.status.statusname}} </span>  
+                                          </td>
+                                          <td *ngIf="o.status.statusid ==4">
+                                            <span style="color: red;">{{o.status.statusname}} </span>  
+                                          </td>
+                                    <td><a [routerLink]="['/admin/orderEdit/', o.orderid]" class="btn btn-sm btn-success"><i class="fa fa-pen-to-square"></i></a></td>
+                                </tr> 
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12 col-md-5">
+                        <div class="dataTables_info" id="datatables-fixed-header_info" role="status" aria-live="polite">Showing 1 to 25 of 57 entries</div>
+                    </div>
+                    <div class="d-flex justify-content-center">
+                        <pagination-controls previousLabel="Prev" nextLabel="Next" (pageChange)="onTableDataChange($event)">
+                        </pagination-controls>
+                    </div>
+                </div>
+            </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</main>
+</div>
+</div>

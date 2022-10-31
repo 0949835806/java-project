@@ -1,0 +1,38 @@
+<div class="wrapper">
+    <app-nav-menu></app-nav-menu>
+    <div class="main">
+        <app-header></app-header>
+<main class="content">
+    <div class="container-fluid p-0">
+
+        <div class="mb-3">
+            <h1 class="h3 d-inline align-middle">Edit role</h1>
+        </div>
+        <div class="row">
+            <div class="col-12 col-xl-6">
+                <div class="card">
+                    <div class="card-body">
+                        <form method="post" #formEdit="ngForm" (ngSubmit)="editRole(formEdit.value)">
+                            <div class="mb-3">
+                                <label class="form-label">Role name: </label>
+                                <select name="roleId" id="roleId" class="form-select mb-3" ngModel [value]="roleId" >
+
+                                    <option *ngFor="let r of roles"
+                                    [value]="r.roleId" >
+                                    {{r.name}}
+                                </option>
+                                </select>
+                            </div>
+                            <div>
+                               
+                            </div>
+                            <button type="submit" class="btn btn-primary" >Submit</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+</div>
+</div>

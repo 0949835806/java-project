@@ -1,0 +1,101 @@
+<app-pre-header></app-pre-header>
+    <div class="title-wrapper">
+        <div class="container"><div class="container-inner">
+          <h1>PRODUCT</h1>
+          <em>Over 4000 Items are available here</em>
+        </div></div>
+      </div>
+  
+      <div class="main">
+        <div class="container">
+          <ul class="breadcrumb">
+              <li><a routerLink="/homePage">Home</a></li>
+              <li><a routerLink="/products">Products</a></li>
+          </ul>
+          <!-- BEGIN SIDEBAR & CONTENT -->
+          <div class="row margin-bottom-40">
+            <!-- BEGIN SIDEBAR -->
+            <div class="sidebar col-md-3 col-sm-5">
+              <ul class="list-group margin-bottom-25 sidebar-menu">
+                <li class="list-group-item clearfix" *ngFor="let cate of categories">
+                    <a routerLink="/product/{{cate.cateId}}" >
+                        <i class="fa fa-angle-right"></i> 
+                        {{cate.cateName}}
+                    </a>
+                </li>
+              </ul>
+  
+  
+              <div class="sidebar-products clearfix">
+                <h2>Bestsellers</h2>
+                <div class="item" *ngFor="let ps of productSale.slice(0, 3)">
+                  <a routerLink="/productDetails/{{ps.proId}}">
+                    <img src="assets/img/photos/{{ps.image}}" class="img-responsive" alt="Berry Lace Dress">
+                    </a>
+                    <h3><a routerLink="/productDetails/{{ps.proId}}">{{ps.proName}}</a></h3>
+                  <div class="price">${{ps.sale_price}}</div>
+                </div>
+              </div>
+            </div>
+            <!-- END SIDEBAR -->
+            <!-- BEGIN CONTENT -->
+            <div class="col-md-9 col-sm-7">
+              <div class="row list-view-sorting clearfix">
+                <div class="col-md-2 col-sm-2 list-view">
+                  <a routerLink="#"><i class="fa fa-th-large"></i></a>
+                  <a routerLink="#"><i class="fa fa-th-list"></i></a>
+                </div>
+                <div class="col-md-10 col-sm-10">
+                  <div class="pull-right">
+                    <label class="control-label">Sort&nbsp;By:</label>
+                    <select class="form-control input-sm" (change)="sorts('proId')">
+                      <option value="#" >Default</option>
+                      <option value="#"selected="selected">Id descending</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+              <!-- BEGIN PRODUCT LIST -->
+              <div class="row product-list">
+                <!-- PRODUCT ITEM START -->
+                <div class="col-md-4 col-sm-6 col-xs-12" *ngFor="let pro of product |orderBy:key:reserve | paginate
+                : {
+                    itemsPerPage: tableSize,
+                    currentPage: page,
+                    totalItems: count
+                  };
+            let i = index">
+                  <div class="product-item" >
+                    <div class="pi-img-wrapper">
+                        <img src="assets/img/photos/{{pro.image}}" class="img-responsive" alt="Berry Lace Dress">
+                        <div>
+                          <a routerLink="#" (click)="addToWishList(pro)" class="btn btn-default fancybox-button">Like</a>
+                          <a routerLink="/productDetails/{{pro.proId}}" class="btn btn-default fancybox-fast-view">View</a>
+                        </div>
+                    </div>
+                    <h3><a routerLink="/productDetails/{{pro.proId}}">{{pro.proName}}</a></h3>
+                    <div class="pi-price">${{pro.sale_price}}</div>
+                    <a routerLink="#" class="btn btn-default add2cart" (click)="addToCart(pro)">Add to cart</a>
+                  </div>
+                </div>
+                <!-- PRODUCT ITEM END -->
+              </div>
+              <!-- END PRODUCT LIST -->
+              <!-- BEGIN PAGINATOR -->
+              <div class="row">
+                <div class="col-md-4 col-sm-4 items-info">Items 1 to 9 of 10 total</div>
+                <div class="col-md-8 col-sm-8">
+                    <div class="d-flex justify-content-center">
+                        <pagination-controls previousLabel="Prev" nextLabel="Next" (pageChange)="onTableDataChange($event)">
+                        </pagination-controls>
+                    </div>
+                </div>
+              </div>
+              <!-- END PAGINATOR -->
+            </div>
+            <!-- END CONTENT -->
+          </div>
+          <!-- END SIDEBAR & CONTENT -->
+        </div>
+      </div>
+<app-pre-footer></app-pre-footer>

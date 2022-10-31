@@ -1,0 +1,260 @@
+<body>
+
+    <app-pre-header></app-pre-header>
+
+    <!-- BEGIN SLIDER -->
+    <div class="page-slider margin-bottom-35">
+        <div id="carousel-example-generic" class="carousel slide carousel-slider">
+            <!-- Indicators -->
+            <ol class="carousel-indicators">
+                <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+                <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+                <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+                <li data-target="#carousel-example-generic" data-slide-to="3"></li>
+            </ol>
+
+            <!-- Wrapper for slides -->
+            <div class="carousel-inner" role="listbox">
+                <!-- First slide -->
+                <div class="item carousel-item-four active">
+                    <div class="container">
+                    </div>
+                </div>
+                
+                <!-- Second slide -->
+                <div class="item carousel-item-five">
+                    <div class="container">
+                    </div>
+                </div>
+
+                <!-- Third slide -->
+                <div class="item carousel-item-six">
+                    <div class="container">
+
+                    </div>
+                </div>
+
+                <!-- Fourth slide -->
+                <div class="item carousel-item-seven">
+                   <div class="center-block">
+                        <div class="center-block-wrap">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Controls -->
+            <a class="left carousel-control carousel-control-shop" href="#carousel-example-generic" role="button" data-slide="prev">
+                <i class="fa fa-angle-left" aria-hidden="true"></i>
+            </a>
+            <a class="right carousel-control carousel-control-shop" href="#carousel-example-generic" role="button" data-slide="next">
+                <i class="fa fa-angle-right" aria-hidden="true"></i>
+            </a>
+        </div>
+    </div>
+    <!-- END SLIDER -->
+
+    <div class="main">
+      <div class="container">
+        <!-- BEGIN SALE PRODUCT & NEW ARRIVALS -->
+        <div class="row margin-bottom-40">
+          <!-- BEGIN SALE PRODUCT -->
+          <div class="col-md-12 sale-product">
+            <h2>New Arrivals</h2>
+            <div class="bxslider-wrapper">
+              <div class="bx-wrapper" style="max-width: 1200px;">
+                <div class="bx-viewport" style="width: 100%; position: relative; height: 360px;">
+                  <ul class="bxslider" data-slides-phone="1" data-slides-tablet="2" data-slides-desktop="5" data-slide-margin="15" style="width: 915%; position: relative; transition-duration: 0s;">
+                    <li style="float: left; list-style: none; position: relative; width: 216px; margin-right: 15px;" class="bx-clone" *ngFor="let p of product.slice(0, 5)">
+                    <div class="product-item">
+                      <div class="pi-img-wrapper">
+                        <img src="assets/img/photos/{{p.image}}" class="img-responsive" alt="Berry Lace Dress">
+                        <div>
+                          <a routerLink="#" (click)="addToWishList(p)" class="btn btn-default fancybox-button">Like</a>
+                          <a routerLink="/productDetails/{{p.proId}}" class="btn btn-default fancybox-fast-view">View</a>
+                        </div>
+                      </div>
+                      <h3><a routerLink="/productDetails/{{p.proId}}">{{p.proName}}</a></h3>
+                      <div class="pi-price">${{p.sale_price}}</div>
+                      <a href="javascript:;" class="btn btn-default add2cart" (click)="addToCart(p)">Add to cart</a>
+                      <div class="sticker sticker-new"></div>
+                    </div>
+                    </li>
+                  </ul>
+            </div>
+                </div>
+            </div>
+
+          </div>
+          <!-- END SALE PRODUCT -->
+        </div>
+        <!-- END SALE PRODUCT & NEW ARRIVALS -->
+
+        <!-- BEGIN SIDEBAR & CONTENT -->
+        <div class="row margin-bottom-40 ">
+          <!-- BEGIN SIDEBAR -->
+          <div class="sidebar col-md-3 col-sm-4">
+            <ul class="list-group margin-bottom-25 sidebar-menu">
+              <li class="list-group-item clearfix" *ngFor="let cate of category">
+                <a href="/product/{{cate.cateId}}">
+                  <i class="fa fa-angle-right"></i> 
+                  {{cate.cateName}}
+                </a>
+              </li>
+            </ul>
+          </div>
+          <!-- END SIDEBAR -->
+          <!-- BEGIN CONTENT -->
+          <div class="col-md-9 col-sm-8">
+            <h2>Three items</h2>
+            <div class="bxslider-wrapper">
+              <div class="bx-wrapper" style="max-width: 876px;">
+                <div class="bx-viewport" style="width: 100%;  position: relative; height: 332px;">
+                  <ul class="bxslider" data-slides-phone="1" data-slides-tablet="2" data-slides-desktop="3" data-slide-margin="15" style="width: 815%; position: relative; transition-duration: 0s; ">
+                    <li style="float: left; list-style: none; position: relative; width: 272.667px; margin-right: 15px;" class="bx-clone" *ngFor="let pt of threePro.slice(0, 3)">
+                  <div class="product-item">
+                    <div class="pi-img-wrapper">
+                      <img src="assets/img/photos/{{pt.image}}" class="img-responsive" alt="Berry Lace Dress">
+                        <div>
+                          <a routerLink="#" (click)="addToWishList(pt)" class="btn btn-default fancybox-button">Like</a>
+                          <a routerLink="/productDetails/{{pt.proId}}" class="btn btn-default fancybox-fast-view">View</a>
+                        </div>
+                    </div>
+                    <h3><a routerLink="/productDetails/{{pt.proId}}">{{pt.proName}}</a></h3>
+                    <div class="pi-price">${{pt.sale_price}}</div>
+                    <a href="#" class="btn btn-default add2cart" (click)="addToCart(pt)">Add to cart</a>
+                    <div class="sticker sticker-sale"></div>
+                  </div>
+                </li></ul>
+              </div>
+                </div>
+            </div>
+          </div>
+          <!-- END CONTENT -->
+        </div>
+        <!-- END SIDEBAR & CONTENT -->
+
+        <!-- BEGIN TWO PRODUCTS & PROMO -->
+        <div class="row margin-bottom-35 ">
+          <!-- BEGIN TWO PRODUCTS -->
+          <div class="col-md-6 two-items-bottom-items">
+            <h2>Two items</h2>
+            <div class="bxslider-wrapper">
+              <div class="bx-wrapper" style="max-width: 569px;">
+                <div class="bx-viewport" style="width: 100%;position: relative; height: 330px;">
+                <ul class="bxslider" data-slides-phone="1" data-slides-tablet="2" data-slides-desktop="2" data-slide-margin="15" style="width: 815%; position: relative;">
+                  <li style="float: left; list-style: none; position: relative; width: 270px; margin-right: 15px;" class="bx-clone" *ngFor="let pp of twoPro.slice(0, 2)">
+                    <div class="product-item">
+                      <div class="pi-img-wrapper">
+                        <img src="assets/img/photos/{{pp.image}}" class="img-responsive" alt="Berry Lace Dress">
+                        <div>
+                          <a routerLink="#" (click)="addToWishList(pp)" class="btn btn-default fancybox-button">Like</a>
+                          <a routerLink="/productDetails/{{pp.proId}}" class="btn btn-default fancybox-fast-view">View</a>
+                        </div>
+                      </div>
+                      <h3><a routerLink="/productDetails/{{pp.proId}}">{{pp.proName}}</a></h3>
+                      <div class="pi-price">${{pp.sale_price}}</div>
+                      <a href="#" class="btn btn-default add2cart" (click)="addToCart(pp)">Add to cart</a>
+                      <div class="sticker sticker-sale"></div>
+                    </div>
+                  </li>
+                </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- END TWO PRODUCTS -->
+          <!-- BEGIN PROMO -->
+          <div class="col-md-6 shop-index-carousel">
+            <div class="content-slider">
+              <div id="myCarousel" class="carousel slide" data-ride="carousel">
+                <!-- Indicators -->
+                <ol class="carousel-indicators">
+                  <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+                  <li data-target="#myCarousel" data-slide-to="1"></li>
+                  <li data-target="#myCarousel" data-slide-to="2"></li>
+                </ol>
+                <div class="carousel-inner" style="margin-left: 40px;">
+                  <div class="item active">
+                    <img src="assets/pages/img/index-sliders/slide1.jpg" class="img-responsive" alt="Berry Lace Dress" height="433px">
+                  </div>
+                  <div class="item">
+                    <img src="assets/pages/img/index-sliders/slide2.jpg" class="img-responsive" alt="Berry Lace Dress">
+                  </div>
+                  <div class="item">
+                    <img src="assets/pages/img/index-sliders/slide3.jpg" class="img-responsive" alt="Berry Lace Dress">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- END PROMO -->
+        </div>        
+        <!-- END TWO PRODUCTS & PROMO -->
+      </div>
+    </div>
+
+    <app-pre-footer></app-pre-footer>
+
+    <!-- BEGIN fast view of a product -->
+    <div id="product-pop-up" style="display: none; width: 700px;">
+            <div class="product-page product-pop-up">
+              <div class="row">
+                <div class="col-md-6 col-sm-6 col-xs-3">
+                  <div class="product-main-image">
+                    <img src="assets/pages/img/products/model7.jpg" alt="Cool green dress with red bell" class="img-responsive">
+                  </div>
+                  <div class="product-other-images">
+                    <a href="javascript:;" class="active"><img alt="Berry Lace Dress" src="assets/pages/img/products/model3.jpg"></a>
+                    <a href="javascript:;"><img alt="Berry Lace Dress" src="assets/pages/img/products/model4.jpg"></a>
+                    <a href="javascript:;"><img alt="Berry Lace Dress" src="assets/pages/img/products/model5.jpg"></a>
+                  </div>
+                </div>
+                <div class="col-md-6 col-sm-6 col-xs-9">
+                  <h2>Cool green dress with red bell</h2>
+                  <div class="price-availability-block clearfix">
+                    <div class="price">
+                      <strong><span>$</span>47.00</strong>
+                      <em>$<span>62.00</span></em>
+                    </div>
+                    <div class="availability">
+                      Availability: <strong>In Stock</strong>
+                    </div>
+                  </div>
+                  <div class="description">
+                    <p>Lorem ipsum dolor ut sit ame dolore  adipiscing elit, sed nonumy nibh sed euismod laoreet dolore magna aliquarm erat volutpat Nostrud duis molestie at dolore.</p>
+                  </div>
+                  <div class="product-page-options">
+                    <div class="pull-left">
+                      <label class="control-label">Size:</label>
+                      <select class="form-control input-sm">
+                        <option>L</option>
+                        <option>M</option>
+                        <option>XL</option>
+                      </select>
+                    </div>
+                    <div class="pull-left">
+                      <label class="control-label">Color:</label>
+                      <select class="form-control input-sm">
+                        <option>Red</option>
+                        <option>Blue</option>
+                        <option>Black</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="product-page-cart">
+                    <div class="product-quantity">
+                        <input id="product-quantity" type="text" value="1" readonly name="product-quantity" class="form-control input-sm">
+                    </div>
+                    <button class="btn btn-primary" type="submit">Add to cart</button>
+                    <a href="shop-item.html" class="btn btn-default">More details</a>
+                  </div>
+                </div>
+
+                <div class="sticker sticker-sale"></div>
+              </div>
+            </div>
+  </div>
+  
+</body>
+

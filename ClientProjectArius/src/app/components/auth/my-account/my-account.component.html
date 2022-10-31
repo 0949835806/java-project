@@ -1,0 +1,43 @@
+<app-pre-header></app-pre-header>
+<div class="main">
+    <div class="container">
+      <ul class="breadcrumb">
+          <li><a routerLink="homePage">Home</a></li>
+          <li class="active">My account page</li>
+      </ul>
+      <!-- BEGIN SIDEBAR & CONTENT -->
+      <div class="row margin-bottom-40">
+        <!-- BEGIN SIDEBAR -->
+        <div class="sidebar col-md-3 col-sm-3">
+          <ul class="list-group margin-bottom-25 sidebar-menu">
+            <li class="list-group-item clearfix"><a routerLink="/signup"><i class="fa fa-angle-right"></i> Login/Register</a></li>
+            <li class="list-group-item clearfix"><a routerLink="#"><i class="fa fa-angle-right"></i> My account</a></li>
+            <li class="list-group-item clearfix"><a routerLink="/wishList"><i class="fa fa-angle-right"></i> Wish list</a></li>
+          </ul>
+        </div>
+        <!-- END SIDEBAR -->
+
+        <!-- BEGIN CONTENT -->
+        <div class="col-md-9 col-sm-7">
+            <h1>My Account Page</h1>
+            <div class="content-page">
+              <h3>My Account</h3>
+              <ul>
+                <li><a routerLink="/userEdit/{{userid}}">Edit your account information</a></li>
+                <li><a routerLink="javascript:;">Change your password</a></li>
+              </ul>
+              <hr>
+
+              <h3>My Orders</h3>
+              <ul>
+                <li><a routerLink="/purcharse">View your order history</a></li>
+                <li><a routerLink="javascript:;">View your return requests</a></li>
+              </ul>
+            </div>
+          </div>
+        <!-- END CONTENT -->
+      </div>
+      <!-- END SIDEBAR & CONTENT -->
+    </div>
+  </div>
+<app-pre-footer></app-pre-footer>
