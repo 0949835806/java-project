@@ -12,7 +12,7 @@
 <div class="col-md-12">
     <div class="card">
         <div class="card-body">
-            <form method="post" #formCreate="ngForm" (ngSubmit)="onCreate(formCreate.value,fileImg.files)" >
+            <form method="post" #formCreate="ngForm" (ngSubmit)="onCreate(formCreate.value)" >
                 <div class="mb-3">
                     <label class="form-label">Product id:</label>
                     <input type="text" class="form-control" name="proId" ngModel placeholder="Product id" required #proId="ngModel">
@@ -47,6 +47,28 @@
                         </div>
                     </div>
                 </div>
+                <div class="row">
+                    <div class="mb-3 col-md-6">
+                        <label class="form-label" for="inputEmail4">Color:</label>
+                        <input type="text" class="form-control" name="color" ngModel placeholder="color" #color="ngModel" required >
+                        <div [hidden]="color.valid || color.pristine "
+                            class="alert alert-danger">
+                            color is required
+                        </div>
+                    </div>
+                    <div class="mb-3 col-md-6">
+                        <label class="form-label" for="inputPassword4">Size:</label>
+                        <input type="text" class="form-control" name="size" ngModel placeholder="Size" #size="ngModel" required>
+                        <div [hidden]="size.valid || size.pristine "
+                            class="alert alert-danger">
+                            size is required
+                        </div>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Offer:</label>
+                    <input type="number" class="form-control" name="offer" ngModel placeholder="Offer" #offer="ngModel">
+                </div>
                 <div class="mb-3">
                     <label class="form-label" for="inputPassword4">Category:</label>
                     <select name="cateId" #myCateElem class="form-select mb-3" >
@@ -69,7 +91,18 @@
                 </div>
                 <div class="mb-3">
                     <label class="form-label w-100">Image:</label>
-                    <input type="file" name="image" #fileImg>
+                    <input type="file" name="file" id="file" (change)="getBase64($event)">
+                </div>
+                <img src={{imageProduct}} width="100px" height="100px" *ngIf="imageProduct != ''"> 
+                <div class="mb-3">
+                    <label class="form-label w-100">Image:</label>
+                    <input type="file" name="files" id="files" multiple (change)="getFile($event)">
+                </div>
+                <div class="mb-3">
+                    <img style="margin-right: 10px;"
+                        *ngFor="let image of listCarouselImages"
+                        src="{{image.name}}" width="100px" height="100px"
+                    />
                 </div>
                 <div>
                     <label class="form-check form-check-inline">

@@ -24,7 +24,7 @@
               <div class="cart-content">
                 <ul class="scroller" style="height: 250px;">
                   <li *ngFor="let c of cart">
-                    <a routerLink="/product/{{c.products.proId}}"><img src="assets/img/photos/{{c.products.image}}" alt="Rolex Classic Watch" width="37" height="34"></a>
+                    <a routerLink="/product/{{c.products.proId}}"><img src={{c.products.image}} alt="Rolex Classic Watch" width="37" height="34"></a>
                     <span class="cart-content-count">x {{c.subtotal}}</span>
                     <strong><a routerLink="item.html">{{c.products.proName}}</a></strong>
                     <em>${{c.products.sale_price*c.subtotal}}</em>

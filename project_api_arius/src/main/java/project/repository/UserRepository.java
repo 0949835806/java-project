@@ -8,9 +8,10 @@ import project.models.User;
 
 @Repository
 public interface UserRepository extends JpaRepository<User, Integer>{
-	
-	
-//	@Query("SELECT u FROM User u WHERE u.username LIKE %?1%")
 	User findByUsername(String username);
+	
+	@Query("SELECT u FROM User u WHERE u.email = ?1")
+	User findByEmail(String email);
+	
 
 }

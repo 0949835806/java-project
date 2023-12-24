@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { JwtHelperService } from '@auth0/angular-jwt';
+import { AuthGuard } from 'src/app/guard/auth-guard.service';
 import { Product } from 'src/app/models/product';
 import { AuthService } from 'src/app/services/auth.service';
 import { CartService } from 'src/app/services/cart.service';
@@ -21,9 +23,10 @@ export class HomePageComponent implements OnInit {
   twoPro :Array<any> =[];
   token: any;
   tokenPayload: any;
+  isLoggedIn = false;
   constructor(private catergoryService: CategogoryService, private productService: ProductService, private cartService: CartService,
-    private notification: NotificationService,private authService: AuthService, private jwtHelper: JwtHelperService, 
-    private wishListService: WishlistService) { }
+    private notification: NotificationService,private authService: AuthService, private jwtHelper: JwtHelperService, private auth: AuthGuard,
+    private router:Router, private wishListService: WishlistService) { }
 
 
   cart : Array<any> = [];
@@ -76,14 +79,21 @@ export class HomePageComponent implements OnInit {
   }
 
   addToWishList(product:Product){
-    let wishlist={
-      products: product,
-      users: this.tokenPayload
+    this.isLoggedIn= !!this.auth.getToken();
+    if(!this.isLoggedIn){
+      alert("loggin to continue")
+      this.router.navigate(['/signin'])
+    }else {
+      let wishlist={
+        products: product,
+        users: this.tokenPayload
+      }
+      this.wishListService.saveWishList(wishlist).subscribe(data => {
+        console.log(data);
+        
+      });
+      this.notification.showSuccess("Add to wishlist successfull","Success");
     }
-    this.wishListService.saveWishList(wishlist).subscribe(data => {
-      console.log(data);
-      
-    });
-    this.notification.showSuccess("Add to wishlist successfull","Success");
+    
   }
 }

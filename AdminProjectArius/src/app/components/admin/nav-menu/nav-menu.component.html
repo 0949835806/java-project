@@ -9,35 +9,33 @@
                 Pages
             </li>
 
-            <li class="sidebar-item active">
-                <a class="sidebar-link" routerLink="/admin/category">
-                <i class="align-middle" data-feather="sliders"></i> <span class="align-middle">Category</span>
+            <li [class]="chosseItem === 1 ? 'sidebar-item active': 'sidebar-item'"(click)="checkIteam(1)">
+                <a class="sidebar-link" (click)="checkIteam(1)" routerLink="/admin/category" >
+                    <i class="align-middle" data-feather="sliders"></i> <span class="align-middle">Category</span>
                 </a>
             </li>
 
-            <li class="sidebar-item">
-                <a class="sidebar-link" routerLink="/admin/product">
-                <i class="align-middle" data-feather="user"></i> <span class="align-middle">Product</span>
+            <li>
+                <div [class]="chosseItem === 2 ? 'sidebar-item active': 'sidebar-item'"(click)="checkIteam(2)">
+                    <a class="sidebar-link"(click)="checkIteam(2)" routerLink="/admin/product" >
+                        <i class="align-middle" data-feather="user"></i> <span class="align-middle">Product</span>
+                    </a>
+                </div>
+
+            </li>
+
+            <li [class]="chosseItem === 3 ? 'sidebar-item active': 'sidebar-item'"(click)="checkIteam(3)">
+                <a class="sidebar-link" (click)="checkIteam(3)" routerLink="/admin/user" >
+                    <i class="align-middle" data-feather="log-in"></i> <span class="align-middle">User</span>
                 </a>
             </li>
 
-            <li class="sidebar-item">
-                <a class="sidebar-link" routerLink="/admin/user">
-                <i class="align-middle" data-feather="log-in"></i> <span class="align-middle">User</span>
+            <li [class]="chosseItem === 4 ? 'sidebar-item active': 'sidebar-item'"(click)="checkIteam(4)">
+                <a class="sidebar-link" (click)="checkIteam(4)" routerLink="/admin/order" >
+                    <i class="align-middle" data-feather="user-plus"></i> <span class="align-middle">Order</span>
                 </a>
             </li>
 
-            <li class="sidebar-item">
-                <a class="sidebar-link" routerLink="/admin/order">
-                <i class="align-middle" data-feather="user-plus"></i> <span class="align-middle">Order</span>
-                </a>
-            </li>
-
-            <li class="sidebar-item">
-                <a class="sidebar-link" routerLink="/admin/comment">
-                <i class="align-middle" data-feather="book"></i> <span class="align-middle">Comment</span>
-                </a>
-            </li>
         </ul>
     </div>
 </nav>

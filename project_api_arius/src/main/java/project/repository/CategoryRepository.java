@@ -12,5 +12,7 @@ public interface CategoryRepository extends JpaRepository<Category, Integer>{
 
 	@Query("SELECT c FROM Category c WHERE c.cateName LIKE %?1%")
 	List<Category> findByCateName(String cateName);
-
+	
+	@Query("SELECT c FROM Category c WHERE c.cateName = ?1")
+	Category getCategoryByCateName(String cateName);
 }

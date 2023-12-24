@@ -11,7 +11,7 @@ import project.repository.StatusOrderRepository;
 import project.service.StatusOrderService;
 
 @Service
-public class StatusOrderServiceImpl implements StatusOrderService{
+public class StatusOrderServiceImpl implements StatusOrderService {
 
 	@Autowired
 	private StatusOrderRepository statusRepository;
@@ -35,6 +35,10 @@ public class StatusOrderServiceImpl implements StatusOrderService{
 	public StatusOrder getById(Integer id) {
 		return statusRepository.getById(id);
 	}
-	
-	
+
+	@Override
+	public List<StatusOrder> findByStatusIdGreaterThanEqual(int statusid) {
+		return statusRepository.findByStatusIdGreaterThanEqual(statusid);
+	}
+
 }

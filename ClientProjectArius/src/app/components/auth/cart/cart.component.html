@@ -20,7 +20,7 @@
                 </tr>
                 <tr *ngFor="let c of cart">
                   <td class="shopping-cart-image">
-                    <a routerLink="/productDetails/{{c.products.proId}}"><img src="assets/img/photos/{{c.products.image}}" alt="Berry Lace Dress"></a>
+                    <a routerLink="/productDetails/{{c.products.proId}}"><img src={{c.products.image}} alt="Berry Lace Dress"></a>
                   </td>
                   <td class="shopping-cart-description">
                     <h3><a routerLink="/productDetails/{{c.products.proId}}">{{c.products.proName}}</a></h3>
@@ -103,7 +103,7 @@
                   <li style="float: left; list-style: none; position: relative; width: 270px; margin-right: 20px;" class="bx-clone" *ngFor="let p of productSale.slice(0, 4)">
                     <div class="product-item">
                       <div class="pi-img-wrapper">
-                        <img src="assets/img/photos/{{p.image}}" class="img-responsive" alt="Berry Lace Dress">
+                        <img src={{p.image}} class="img-responsive" alt="Berry Lace Dress">
                         <div>
                           <a routerLink="#" (click)="addToWishList(p)" class="btn btn-default fancybox-button">Like</a>
                           <a routerLink="/productDetails/{{p.proId}}" class="btn btn-default fancybox-fast-view">View</a>

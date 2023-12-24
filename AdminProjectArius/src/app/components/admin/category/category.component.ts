@@ -37,13 +37,21 @@ export class CategoryComponent implements OnInit {
     this.fetchPosts();
   }
   onDelete(cateId: number){
-    this.CategoryService.delete(cateId).subscribe(data => {
-      this.CategoryService.getListCategory().subscribe(data => {
-        this.category = data;
-      })
+    this.CategoryService.delete(cateId).subscribe({
+      next: data => {
+        this.notification.showSuccess("Delete successfull","Success");
+        this.CategoryService.getListCategory().subscribe(data => {
+          this.category = data;
+        })
+        window.location.reload();
+      },
+      error: error => {
+        this.notification.showError("Delete failed!","Error");
+      }
+      
     });
-    this.notification.showSuccess("Delete successfull","Success");
-    window.location.reload();
+    
+   
   }
 
   key: string= 'id'

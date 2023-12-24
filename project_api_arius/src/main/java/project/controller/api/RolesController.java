@@ -14,7 +14,8 @@ import project.service.RoleService;
 
 @RestController
 @RequestMapping("/api/roles")
-@CrossOrigin("http://localhost:4200")
+@CrossOrigin("http://10.0.2.2:8081")
+//@CrossOrigin("http://localhost:4200")
 public class RolesController {
 	@Autowired
 	private RoleService roleService;

@@ -17,52 +17,63 @@ export class OrderEditComponent implements OnInit {
   order: Orders = new Orders();
   id :number =0;
   status : Array<any> = [];
-  email!: string;
-  phone!: number;
-  address !: string;
-  statusOrder :any;
+  statusOrder !: string;
+  fullName !:string;
+  phone!: string;
+  street!: string;
+  name !: string;
   @ViewChild("myCateElem") myCateElem!: ElementRef;
   getStatus : Array<any> = [];
   constructor( private orderServie: OrdersService, private routex: ActivatedRoute, private router: Router, private notification: NotificationService) { }
 
   ngOnInit(): void {
-    this.orderServie.getStatusOrder().subscribe(data => {
-      this.status =data;
-    })
+    
     this.id = this.routex.snapshot.params['id'];
-    this.getOrderById();
-  }
-  getOrderById(){
     this.orderServie.getOrderById(this.id).subscribe(data => {
       this.order.orderid = data.orderid;
-      this.order.fullName =data.user.fullName;
-      this.email = data.user.email;
-      this.phone = data.user.phone;
-      this.address =data.user.address;
-      this.order.delivery =data.delivery;
-      this.order.note=data.note;
+      this.order.paymentMethod =data.paymentMethod;
+      this.order.totalPrice = data.totalPrice;
+      this.order.address = data.address;
+      this.name = data.address.name;
+      this.fullName = data.address.fullName;
+      this.phone = data.address.mobileNo;
+      this.street = data.address.street;
+      this.order.user =data.user;
+      this.order.lineItems=data.lineItems;
       this.statusOrder =data.status.statusid;
+
+      this.orderServie.getStatusOrder(data.status.statusid).subscribe(statusid => {
+        this.status =statusid;
+      })
     })
-    
   }
 
 
   onUpdate(){
-    this.orderServie.getOrderById(this.id).subscribe(data => {
-      let dataOrder ={
-        orderid: data.orderid,
-        dateofset : data.dateofset,
-        delivery : data.delivery,
-        user: data.user,
-        note: data.note
+    const statusedit = this.statusOrder + 1;
+    if(statusedit == this.myCateElem.nativeElement.value || this.myCateElem.nativeElement.value == 5){
+      let dataHistory = {
+        orderId: this.order,
+        updateDate: new Date()
       }
-      console.log(dataOrder);
-      this.orderServie.updateOrder(dataOrder, this.myCateElem.nativeElement.value).subscribe(data =>{
-        console.log(data);
+      this.orderServie.addStatusHistory(dataHistory, this.myCateElem.nativeElement.value).subscribe(data => {
+        console.log("History inserted: ",data);
+        
       })
-    })
-    this.router.navigate(['/admin/order']);
-    this.notification.showSuccess("Edit order successfull","Success");
-    // window.location.reload();
+      this.orderServie.updateOrder(this.order, this.myCateElem.nativeElement.value).subscribe({
+        next: (value) => {
+          console.log("Insert successfull: ", value);
+          this.notification.showSuccess("Edit order successfull","Success");
+          this.router.navigate(['/admin/order']);
+        },
+        error: (err) => {
+          console.log("Error: ", err);
+          this.notification.showError("Edit order failed!","Error");
+        },
+      })
+    }else{
+      this.notification.showWarning("You should be choose status before!","Warning")
+    }
+    
   }
 }

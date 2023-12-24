@@ -6,8 +6,11 @@ import java.util.stream.Stream;
 import org.springframework.web.multipart.MultipartFile;
 
 public interface IStorageService {
-	public String storeFile(MultipartFile file);
-	public Stream<Path> loadAll();
-	public byte[] readFileContent(String fillName);
-	public void deleteAllFiles();
+	String storeFile(MultipartFile file);
+
+	Stream<Path> loadAll();
+
+	byte[] readFileContent(String fillName);
+
+	void deleteAllFiles();
 }

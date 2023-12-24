@@ -35,6 +35,7 @@
                                 <tr>
                                     <th (click)="sort('proId')" class="sorting sorting_asc" tabindex="0" aria-controls="datatables-fixed-header" rowspan="1" colspan="1" aria-label="Name: activate to sort column descending" style="width: 171.288px;" aria-sort="ascending">Category Id</th>
                                     <th  tabindex="0" aria-controls="datatables-fixed-header" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 260.875px;">Name</th>
+                                    <th  tabindex="0" aria-controls="datatables-fixed-header" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 260.875px;">Image</th>
                                     <th  tabindex="0" aria-controls="datatables-fixed-header" rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending" style="width: 267.7875px;">Status</th>
                                     <th colspan="2" rowspan="2">#</th>
                                 </tr>
@@ -48,8 +49,9 @@
                                     totalItems: count
                                   };
                             let i = index">
-                                    <td>{{cate.cateId}}</td>
+                                    <td>{{(page-1)*tableSize + i+1}}</td>
                                     <td>{{cate.cateName}}</td>
+                                    <td><img src={{cate.image}} width="60px" height="60px" /></td>
                                     <td>{{cate.status == true ? "active" : "inactive"}}</td>
                                     <td><a [routerLink]="['/admin/categoryEdit/', cate.cateId]" class="btn btn-sm btn-success"><i class="fa fa-pen-to-square"></i></a></td>
                                     <td><a href="javascript:void()"(click)="onDelete(cate.cateId)" onclick="return confirm('Ban co chac muon xoa ko?')" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i></a></td>

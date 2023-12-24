@@ -1,26 +1,21 @@
 package project.models;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 @Table(name = "product")
@@ -28,36 +23,53 @@ public class Product {
 	@Id
 	@Column(name = "pro_id")
 	private String proId;
-	
+
 	@Column(name = "pro_name")
 	private String proName;
-	
+
 	@Column(name = "price")
 	private float price;
-	
+
 	@Column(name = "sale_price")
 	private float sale_price;
-	
+
+	@Column(name = "color")
+	private String color;
+
+	@Column(name = "size")
+	private String size;
+
+	@Column(name = "offer")
+	private String offer;
+
 	@Column(name = "description")
 	private String description;
-	
-	@Column(name = "image")
+
+	@Column(name = "image", columnDefinition = "LONGTEXT")
 	private String image;
-	
+
 	@Column(name = "status")
 	private boolean status;
 
 	@ManyToOne
 	@JoinColumn(name = "cate_id", referencedColumnName = "cate_id")
 	private Category cateId;
-	
+
 	@OneToMany(mappedBy = "product")
 	@JsonIgnore
 	private List<Comment> comment;
-	
+
 	@OneToMany(mappedBy = "products")
 	@JsonIgnore
 	private List<WishList> wishlist;
+
+	@OneToMany(mappedBy = "productCart")
+	@JsonIgnore
+	private List<Cart> cart;
+
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@JoinColumn(name = "pro_id", referencedColumnName = "pro_id")
+	private List<ImagesProduct> carouselImages = new ArrayList<>();
 
 	public String getProId() {
 		return proId;
@@ -89,6 +101,14 @@ public class Product {
 
 	public void setSale_price(float sale_price) {
 		this.sale_price = sale_price;
+	}
+
+	public String getOffer() {
+		return offer;
+	}
+
+	public void setOffer(String offer) {
+		this.offer = offer;
 	}
 
 	public String getDescription() {
@@ -123,8 +143,6 @@ public class Product {
 		this.cateId = cateId;
 	}
 
-
-
 	public List<Comment> getComment() {
 		return comment;
 	}
@@ -133,7 +151,6 @@ public class Product {
 		this.comment = comment;
 	}
 
-	
 	public List<WishList> getWishlist() {
 		return wishlist;
 	}
@@ -142,24 +159,61 @@ public class Product {
 		this.wishlist = wishlist;
 	}
 
+	public List<Cart> getCart() {
+		return cart;
+	}
+
+	public void setCart(List<Cart> cart) {
+		this.cart = cart;
+	}
+
+	public String getColor() {
+		return color;
+	}
+
+	public void setColor(String color) {
+		this.color = color;
+	}
+
+	public String getSize() {
+		return size;
+	}
+
+	public void setSize(String size) {
+		this.size = size;
+	}
+
+	public List<ImagesProduct> getCarouselImages() {
+		return carouselImages;
+	}
+
+	public void setCarouselImages(List<ImagesProduct> carouselImages) {
+		this.carouselImages = carouselImages;
+	}
+
 	public Product() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Product(String proId, String proName, float price, float sale_price, String description, String image,
-			boolean status, Category cateId, List<Comment> comment, List<WishList> wishlist) {
+	public Product(String proId, String proName, float price, float sale_price, String color, String size, String offer,
+			String description, String image, boolean status, Category cateId, List<Comment> comment,
+			List<WishList> wishlist, List<Cart> cart, List<ImagesProduct> carouselImages) {
 		super();
 		this.proId = proId;
 		this.proName = proName;
 		this.price = price;
 		this.sale_price = sale_price;
+		this.color = color;
+		this.size = size;
+		this.offer = offer;
 		this.description = description;
 		this.image = image;
 		this.status = status;
 		this.cateId = cateId;
 		this.comment = comment;
 		this.wishlist = wishlist;
+		this.cart = cart;
+		this.carouselImages = carouselImages;
 	}
 
-	
 }

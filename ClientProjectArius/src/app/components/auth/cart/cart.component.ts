@@ -121,14 +121,21 @@ export class CartComponent implements OnInit {
   }
 
   addToWishList(product:Product){
-    let wishlist={
-      products: product,
-      users: this.tokenPayload
+    this.isLoggedIn= !!this.authGuard.getToken();
+    if(!this.isLoggedIn){
+      alert("loggin to continue")
+      this.router.navigate(['/signin'])
+    }else {
+      let wishlist={
+        products: product,
+        users: this.tokenPayload
+      }
+      this.wishListService.saveWishList(wishlist).subscribe(data => {
+        console.log(data);
+        
+      });
+      this.notification.showSuccess("Add to wishlist successfull","Success");
     }
-    this.wishListService.saveWishList(wishlist).subscribe(data => {
-      console.log(data);
-      
-    });
-    this.notification.showSuccess("Add to wishlist successfull","Success");
+    
   }
 }

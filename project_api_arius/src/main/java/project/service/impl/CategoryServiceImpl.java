@@ -69,5 +69,23 @@ public class CategoryServiceImpl implements CategoryService{
 	public List<Category> findByCateName(String cateName) {
 		return categoryService.findByCateName(cateName);
 	}
-	
+
+
+	@Override
+	public boolean exists(Example<Category> example) {
+		return categoryService.exists(example);
+	}
+
+
+	@Override
+	public boolean existsById(Integer id) {
+		return categoryService.existsById(id);
+	}
+
+
+	@Override
+	public Category getCategoryByCateName(String cateName) {
+		return categoryService.getCategoryByCateName(cateName);
+	}
+
 }

@@ -3,6 +3,7 @@ package project.service;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -27,6 +28,12 @@ public interface CategoryService {
 	List<Category> findByCateName(String cateName);
 
 	List<Category> findAll();
+
+	boolean exists(Example<Category> example);
+
+	boolean existsById(Integer id);
+
+	Category getCategoryByCateName(String cateName);
 
 
 }

@@ -14,8 +14,9 @@ export class NavMenuComponent implements OnInit {
   public jwtHelper: JwtHelperService = new JwtHelperService();
 
   public isExpanded = false;
+  chosseItem = -1;
   constructor(private router: Router) { }
-
+  
   currentUser: any;
   ngOnInit(): void {
   }
@@ -26,6 +27,10 @@ export class NavMenuComponent implements OnInit {
 
   toggle() {
     this.isExpanded == !this.isExpanded;
+  }
+
+  checkIteam(id: number){
+    this.chosseItem = id;
   }
 
   isUserAuthenticated() {

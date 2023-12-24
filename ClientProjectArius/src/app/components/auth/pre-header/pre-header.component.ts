@@ -21,8 +21,6 @@ export class PreHeaderComponent implements OnInit {
   tokenPayload: any;
   expirationDate: any;
   isLoggedIn = false;
-  showAdminBroad = false;
-  showAuthBroad= false;
   
   constructor(private categoryService:CategogoryService, private authGuard: AuthGuard, private authService:AuthService,
   private jwtHelper :JwtHelperService, private cartService: CartService, private notification: NotificationService) { }
@@ -38,9 +36,6 @@ export class PreHeaderComponent implements OnInit {
     if(this.isLoggedIn){
       const user = this.jwtHelper.decodeToken(this.token);
       this.roles = user.roles;
-      
-        this.showAdminBroad = this.roles.includes("ROLE_ADMIN");
-        this.showAuthBroad = this.roles.includes("ROLE_USER");
 
         this.username = user.sub;
         // console.log(user);

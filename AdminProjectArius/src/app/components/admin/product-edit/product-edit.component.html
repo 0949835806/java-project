@@ -12,7 +12,7 @@
 <div class="col-md-12">
     <div class="card">
         <div class="card-body">
-            <form method="post" #formEdit="ngForm" (ngSubmit)="onUpdate(formEdit.value,fileUpload.files)" >
+            <form method="post" #formEdit="ngForm" (ngSubmit)="onUpdate(formEdit.value)" >
                 <!-- <div *ngFor="let pro of produc.pro"> -->
                     <div class="mb-3">
                         <label class="form-label">Product id:</label>
@@ -20,17 +20,51 @@
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Product Name:</label>
-                        <input type="text" class="form-control" name="proName" placeholder="Product name" [(ngModel)]="produc.proName">
+                        <input type="text" class="form-control" name="proName" #proName="ngModel" placeholder="Product name" [(ngModel)]="produc.proName">
+                        <div [hidden]="proName.valid || proName.pristine"
+                            class="alert alert-danger">
+                            Product Name is required
+                        </div>
                     </div>
                     <div class="row">
                         <div class="mb-3 col-md-6">
                             <label class="form-label" for="inputEmail4">Price:</label>
-                            <input type="number" class="form-control" name="price"  placeholder="Price" [(ngModel)]="produc.price">
+                            <input type="number" class="form-control" name="price"  placeholder="Price" #price="ngModel" [(ngModel)]="produc.price">
+                            <div [hidden]="price.valid || price.pristine "
+                                class="alert alert-danger">
+                                Price is required
+                        </div>
                         </div>
                         <div class="mb-3 col-md-6">
                             <label class="form-label" for="inputPassword4">Sale price:</label>
-                            <input type="number" class="form-control" name="sale_price"  placeholder="Sale price"  [(ngModel)]="produc.sale_price">
+                            <input type="number" class="form-control" name="sale_price"  placeholder="Sale price" #sale="ngModel"  [(ngModel)]="produc.sale_price">
+                            <div *ngIf="sale.value>price.value "
+                                class="alert alert-danger" >
+                                <span [hidden]="sale.valid || sale.pristine"></span> Sale is required and smaller than price
+                            </div>
                         </div>
+                    </div>
+                    <div class="row">
+                        <div class="mb-3 col-md-6">
+                            <label class="form-label" for="inputEmail4">Color:</label>
+                            <input type="text" class="form-control" name="color" #color="ngModel"  placeholder="color" [(ngModel)]="produc.color" required >
+                            <div [hidden]="color.valid || color.pristine "
+                                class="alert alert-danger">
+                                color is required
+                            </div>
+                        </div>
+                        <div class="mb-3 col-md-6">
+                            <label class="form-label" for="inputPassword4">Size:</label>
+                            <input type="text" class="form-control" name="size" #size="ngModel"  placeholder="Size" [(ngModel)]="produc.size" required>
+                            <div [hidden]="size.valid || size.pristine "
+                                class="alert alert-danger">
+                                size is required
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Offer:</label>
+                        <input type="number" class="form-control" name="offer" [(ngModel)]="produc.offer" placeholder="Offer">
                     </div>
                     <div class="mb-3">
                         <label class="form-label" for="inputPassword4">Category:</label>
@@ -50,7 +84,18 @@
                     </div>
                     <div class="mb-3">
                         <label class="form-label w-100">Image:</label>
-                        <input type="file" name="image" #fileUpload>
+                        <input type="file" name="file" id="file" (change)="getBase64($event)">
+                    </div>
+                    <img src={{imageProduct}} width="100px" height="100px" *ngIf="produc.image != null"> 
+                    <div class="mb-3">
+                        <label class="form-label w-100">Image:</label>
+                        <input type="file" name="files" id="files" multiple (change)="getFile($event)">
+                    </div>
+                    <div class="mb-3">
+                        <img style="margin-right: 10px;"
+                            *ngFor="let image of produc.carouselImages"
+                            src="{{image.name}}" width="100px" height="100px"
+                        />
                     </div>
                     <div>
                         <label class="form-check form-check-inline">
@@ -68,7 +113,7 @@
                     
                     </div>
                 <!-- </div> -->
-                <button type="submit" class="btn btn-primary">Submit</button>
+                <button type="submit" class="btn btn-primary" [disabled]="!formEdit.valid">Submit</button>
             </form>
         </div>
     </div>

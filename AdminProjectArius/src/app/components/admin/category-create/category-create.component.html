@@ -12,23 +12,30 @@
             <div class="col-12 col-xl-6">
                 <div class="card">
                     <div class="card-body">
-                        <form method="post" [formGroup]="categoryCreate" (ngSubmit)="onCreate()">
+                        <form method="post" #categoryCreate="ngForm" (ngSubmit)="onCreate(categoryCreate.value)">
+                            <div *ngIf="invalidCategory" class="alert alert-danger">Category already exists / insert category is failed.</div>
                             <div class="mb-3">
                                 <label class="form-label">Category name: </label>
-                                <input type="text" class="form-control" formControlName="cateName" placeholder="Enter category: ">
-                                <div *ngIf="!validator?.valid && (validator?.dirty ||validator?.touched)">
+                                <input type="text" class="form-control" name="cateName" ngModel placeholder="Enter category: " required="The category name is required." >
+                                <!-- <span *ngIf="categoryCreate.value.name.errors?.unique">not unique</span> -->
+                                <!-- <div *ngIf="!validator?.valid && (validator?.dirty ||validator?.touched)">
                                     <span style="color: red;">The category name is required.</span> 
-                                </div>
+                                </div> -->
                             </div>
+                            <div class="mb-3">
+                                <label class="form-label w-100">Image:</label>
+                                <input type="file" name="file" id="file" (change)="getBase64($event)">
+                            </div>
+                            <img src={{imageCategory}} width="100px" height="100px" *ngIf="imageCategory != ''"> 
                             <div>
                                 <label class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio"  formControlName="status" value="true">
+                                    <input class="form-check-input" type="radio"  name="status" ngModel value="true">
                                     <span class="form-check-label">
                                         Active
                                     </span>
                                 </label>
                                 <label class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" formControlName="status"value="false">
+                                    <input class="form-check-input" type="radio" name="status"value="false" ngModel>
                                     <span class="form-check-label">
                                         Inactive
                                     </span>

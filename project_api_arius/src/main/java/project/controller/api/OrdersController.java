@@ -4,11 +4,9 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
-import javax.persistence.criteria.Order;
-import javax.xml.crypto.Data;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -21,13 +19,14 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import project.models.LineItems;
+import project.models.OrderHistory;
 import project.models.Orders;
 import project.models.StatusOrder;
-import project.repository.StatusOrderRepository;
-import project.service.LineItemsService;
+import project.models.User;
+import project.service.OrderHistoryService;
 import project.service.OrdersService;
 import project.service.StatusOrderService;
+import project.service.UserService;
 
 @RestController
 @RequestMapping("/api/order")
@@ -35,82 +34,83 @@ public class OrdersController {
 
 	@Autowired
 	private OrdersService ordersService;
-	
+
 	@Autowired
 	private StatusOrderService statusService;
+
+	@Autowired
+	private UserService userService;
 	
 	@Autowired
-	private LineItemsService lineItemService;
-	
+	private OrderHistoryService historyService;
+
 	@InitBinder
 	public void initBinder(WebDataBinder binder) {
 		SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd");
 		binder.registerCustomEditor(Date.class, new CustomDateEditor(sf, true));
 	}
-	
+
 	@GetMapping("")
-	public ResponseEntity<List<Orders>> getListOrder(){
+	public ResponseEntity<List<Orders>> getListOrder() {
 		return ResponseEntity.ok(ordersService.findAll());
 	}
-	
+
+	@GetMapping("/{username}")
+	public ResponseEntity<?> getListOrderByUser(@PathVariable("username") String username){
+		List<Orders> listOrder = ordersService.getOrderByUser(username);
+		return ResponseEntity.ok(listOrder);
+	}
 	@GetMapping("/getOrderById/{orderid}")
-	public ResponseEntity<Object> getOrderById(@PathVariable("orderid")Integer orderid){
+	public ResponseEntity<Object> getOrderById(@PathVariable("orderid") Integer orderid) {
 		Orders order = ordersService.findById(orderid).get();
 		return ResponseEntity.ok(order);
 	}
-	
+
 	@GetMapping("/getStatusOrder")
-	public ResponseEntity<List<StatusOrder>> getStatusOrder(){
+	public ResponseEntity<List<StatusOrder>> getStatusOrder() {
 		return ResponseEntity.ok(statusService.findAll());
 	}
 	
-	@GetMapping("/getLineItemsByOrder/{orderid}")
-	public ResponseEntity<List<LineItems>> getLineItems(@PathVariable("orderid")Integer orderid){
-		List<LineItems> ltByOrder = lineItemService.getLineItemsByOrder(orderid);
-		return ResponseEntity.ok(ltByOrder);
+	@GetMapping("/getStatusOrderById/{statusid}")
+	public ResponseEntity<List<StatusOrder>> getStatusOrderById(@PathVariable("statusid")int statusid) {
+		return ResponseEntity.ok(statusService.findByStatusIdGreaterThanEqual(statusid));
 	}
-	
-	@PostMapping("/saveOrder")
-	public ResponseEntity saveOrder(@RequestBody Orders orders){
+
+	@PostMapping("/saveOrder/{username}")
+	public ResponseEntity<?> saveOrder(@RequestBody Orders orders, @PathVariable("username") String username) {
+		User user = userService.getUser(username);
+		orders.setUser(user);
 		try {
 			Orders o = ordersService.save(orders);
-			return ResponseEntity.ok(o);
+			OrderHistory oh = new OrderHistory();
+			oh.setOrderId(o);
+			oh.setStatusHisoty(new StatusOrder(1, "Đang xử lí"));
+			oh.setUpdateDate(new Date());
+			historyService.save(oh);
+			return new ResponseEntity<Object>(o, HttpStatus.OK);
 		} catch (Exception e) {
 			// TODO: handle exception
-			return ResponseEntity.status(400).body("Insert failed!");
+			return new ResponseEntity<Object>(HttpStatus.BAD_REQUEST, HttpStatus.BAD_REQUEST);
 		}
 	}
-	
-	@PostMapping("/saveLineItems")
-	public ResponseEntity saveLineItems(@RequestBody LineItems lineItems){
-		try {
-			lineItemService.save(lineItems);
-			return ResponseEntity.ok(200);
-		} catch (Exception e) {
-			// TODO: handle exception
-			return ResponseEntity.status(400).body("Insert failed!");
-		}
-	}
-	
-	
+
 	@PutMapping("/editOrder/{statusid}")
-	public ResponseEntity<String> editOrder(@RequestBody Orders orders,@PathVariable("statusid")int statusid){
-		
+	public ResponseEntity<?> editOrder(@RequestBody Orders orders, @PathVariable("statusid") int statusid) {
+
 		try {
 			StatusOrder so = statusService.findById(statusid).get();
-			System.out.println(so.getStatusname());
 			orders.setStatus(so);
 			ordersService.edit(orders);
-			return ResponseEntity.ok("Update successfull");
+			return new ResponseEntity<Object>(orders, HttpStatus.OK);
 		} catch (Exception e) {
 			// TODO: handle exception
-			return ResponseEntity.status(400).body("Update failed!");
+			return new ResponseEntity<Object>(HttpStatus.BAD_REQUEST, HttpStatus.BAD_REQUEST);
 		}
 	}
-	
+
 	@DeleteMapping("/deleteOrder/{orderid}")
-	public void deleteOrder(@PathVariable("orderid")Integer orderid) {
+	public void deleteOrder(@PathVariable("orderid") Integer orderid) {
 		ordersService.deleteById(orderid);
 	}
-	
+
 }

@@ -25,12 +25,9 @@ export class EditRoleComponent implements OnInit {
     this.id = this.routex.snapshot.params['id'];
     this.userService.getUserById(this.id).subscribe(data => {
       this.user.userid =data.userid;
-      this.user.fullName =data.fullName;
       this.user.username =data.username;
       this.user.password=data.password;
       this.user.email =data.email;
-      this.user.phone =data.phone;
-      this.user.address =data.address;
       this.roleId = data.roles[0].roleId;
       console.log(this.roleId);
     })
@@ -41,11 +38,8 @@ export class EditRoleComponent implements OnInit {
     let dataEdit = {
       userid: this.user.userid,
       username: this.user.username,
-      fullName: this.user.fullName,
       password: this.user.password,
-      email: this.user.email,
-      phone: this.user.phone,
-      address: this.user.address
+      email: this.user.email
     }
     console.log((dataEdit));
     

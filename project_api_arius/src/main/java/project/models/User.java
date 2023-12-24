@@ -15,6 +15,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Pattern;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -25,29 +26,23 @@ public class User {
 	@Column(name = "user_id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int userid;
-	
+
 	@Column(name = "user_name")
 //	@NotEmpty(message = "họ và tên khộng được để trống")
 	private String username;
-	
-	@Column(name = "full_name")
-	private String fullName;
-	
+
+	@Column(name = "email")
+	private String email;
+
 	@Column(name = "password")
 //	@NotEmpty(message = "pasword ko được để trống")
 	private String password;
-	
-	@Column(name = "email")
-//	@NotEmpty(message = "email ko được để trống")
-//	@Email
-	private String email;
-	
-	@Column(name = "phone")
-//	@NotEmpty(message = "sdt ko được để trống")
-	private String phone;
-	
-	@Column(name = "address")
-	private String address;
+
+	@Column(name = "reset_password_token")
+	private String resetPassword;
+
+	@Column(name = "reset_password_token_expire")
+	private String resetPasswordExpire;
 
 	@ManyToMany(fetch = FetchType.EAGER)
 	private Collection<Role> roles = new ArrayList<Role>();
@@ -55,15 +50,18 @@ public class User {
 	@OneToMany(mappedBy = "user")
 	@JsonIgnore
 	private List<Orders> listOrder;
-	
+
 	@OneToMany(mappedBy = "users")
 	@JsonIgnore
-	private List<Comment> comment; 
-	
+	private List<Comment> comment;
+
 	@OneToMany(mappedBy = "users")
 	@JsonIgnore
 	private List<WishList> wishlist;
-	
+
+	@OneToMany(mappedBy = "userId")
+	@JsonIgnore
+	private List<Address> address;
 
 	public int getUserid() {
 		return userid;
@@ -80,15 +78,6 @@ public class User {
 	public void setUsername(String username) {
 		this.username = username;
 	}
-	
-
-	public String getFullName() {
-		return fullName;
-	}
-
-	public void setFullName(String fullName) {
-		this.fullName = fullName;
-	}
 
 	public String getPassword() {
 		return password;
@@ -96,6 +85,62 @@ public class User {
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+	public String getResetPassword() {
+		return resetPassword;
+	}
+
+	public void setResetPassword(String resetPassword) {
+		this.resetPassword = resetPassword;
+	}
+
+	public String getResetPasswordExpire() {
+		return resetPasswordExpire;
+	}
+
+	public void setResetPasswordExpire(String resetPasswordExpire) {
+		this.resetPasswordExpire = resetPasswordExpire;
+	}
+
+	public Collection<Role> getRoles() {
+		return roles;
+	}
+
+	public void setRoles(Collection<Role> roles) {
+		this.roles = roles;
+	}
+
+	public List<Orders> getListOrder() {
+		return listOrder;
+	}
+
+	public void setListOrder(List<Orders> listOrder) {
+		this.listOrder = listOrder;
+	}
+
+	public List<Comment> getComment() {
+		return comment;
+	}
+
+	public void setComment(List<Comment> comment) {
+		this.comment = comment;
+	}
+
+	public List<WishList> getWishlist() {
+		return wishlist;
+	}
+
+	public void setWishlist(List<WishList> wishlist) {
+		this.wishlist = wishlist;
+	}
+
+	public List<Address> getAddress() {
+		return address;
+	}
+
+	public void setAddress(List<Address> address) {
+		this.address = address;
 	}
 
 	public String getEmail() {
@@ -106,82 +151,25 @@ public class User {
 		this.email = email;
 	}
 
-	public String getPhone() {
-		return phone;
-	}
-
-	public void setPhone(String phone) {
-		this.phone = phone;
-	}
-
-	public String getAddress() {
-		return address;
-	}
-
-	public void setAddress(String address) {
-		this.address = address;
-	}
-
-
-	public Collection<Role> getRoles() {
-		return roles;
-	}
-
-	public void setRoles(Collection<Role> roles) {
-		this.roles = roles;
-	}
-
-
-	
-
-	public List<Orders> getListOrder() {
-		return listOrder;
-	}
-
-	public void setListOrder(List<Orders> listOrder) {
-		this.listOrder = listOrder;
-	}
-	
-	
-	
-	public List<Comment> getComment() {
-		return comment;
-	}
-
-	public void setComment(List<Comment> comment) {
-		this.comment = comment;
-	}
-
-	
-	public List<WishList> getWishlist() {
-		return wishlist;
-	}
-
-	public void setWishlist(List<WishList> wishlist) {
-		this.wishlist = wishlist;
-	}
-
 	public User() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public User(int userid, String username, String fullName, String password, String email, String phone,
-			String address, Collection<Role> roles, List<Orders> listOrder, List<Comment> comment,
-			List<WishList> wishlist) {
+	public User(int userid, String username, String email, String password, String resetPassword,
+			String resetPasswordExpire, Collection<Role> roles, List<Orders> listOrder, List<Comment> comment,
+			List<WishList> wishlist, List<Address> address) {
 		super();
 		this.userid = userid;
 		this.username = username;
-		this.fullName = fullName;
-		this.password = password;
 		this.email = email;
-		this.phone = phone;
-		this.address = address;
+		this.password = password;
+		this.resetPassword = resetPassword;
+		this.resetPasswordExpire = resetPasswordExpire;
 		this.roles = roles;
 		this.listOrder = listOrder;
 		this.comment = comment;
 		this.wishlist = wishlist;
+		this.address = address;
 	}
 
-
-	
 }

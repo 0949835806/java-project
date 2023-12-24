@@ -21,4 +21,6 @@ public interface OrdersService {
 	
 	Orders edit(Orders o);
 
+	List<Orders> getOrderByUser(String username);
+
 }

@@ -34,11 +34,8 @@
                                 <tr>
                                     <th (click)="sort('proId')" class="sorting sorting_asc" tabindex="0" aria-controls="datatables-fixed-header" rowspan="1" colspan="1" aria-label="Name: activate to sort column descending" style="width: 97.7875px;" aria-sort="ascending">User Id</th>
                                     <th  tabindex="0" aria-controls="datatables-fixed-header" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 97.7875px;">User Name</th>
-                                    <th  tabindex="0" aria-controls="datatables-fixed-header" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 113.675spx;">Full Name</th>
                                     <th  tabindex="0" aria-controls="datatables-fixed-header" rowspan="1" colspan="1" aria-label="Office: activate to sort column ascending" style="width: 97.7875px;">Role</th>
-                                    <th  tabindex="0" aria-controls="datatables-fixed-header" rowspan="1" colspan="1" aria-label="Age: activate to sort column ascending" style="width: 55.825px;">Email</th>
-                                    <th  tabindex="0" aria-controls="datatables-fixed-header" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending" style="width: 94.7875px;">Phone</th>
-                                    <th  tabindex="0" aria-controls="datatables-fixed-header" rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending" style="width: 113.675px;">Address</th>
+                                    <th  tabindex="0" aria-controls="datatables-fixed-header" rowspan="1" colspan="1" aria-label="Age: activate to sort column ascending" style="width: 197.7875px;">Email</th>
                                     <th>#</th>
                                 </tr>
                             </thead>
@@ -51,9 +48,8 @@
                                     totalItems: count
                                   };
                             let i = index">
-                                    <td>{{u.userid}}</td>
+                                    <td>{{(page-1)*tableSize + i+1}}</td>
                                     <td>{{u.username}}</td>
-                                    <td>{{u.fullName}}</td>
                                     <td>
                                         <div *ngFor="let r of u.roles">
                                             <a routerLink="/admin/editRole/{{u.userid}}">{{r.name}}</a>
@@ -61,9 +57,9 @@
 
                                     </td>
                                     <td>{{u.email}}</td>
-                                    <td>{{u.phone}}</td>
-                                    <td>{{u.address}}</td>
-                                    <td><a [routerLink]="['/admin/userEdit/', u.userid]" class="btn btn-sm btn-success"><i class="fa fa-pen-to-square"></i></a></td>
+                                    <td>
+                                        <a [routerLink]="['/admin/userEdit/', u.userid]" class="btn btn-sm btn-success"><i class="fa fa-pen-to-square"></i></a>
+                                    </td>
                                     <td><a href="javascript:void()"(click)="onDelete(u.userid)" onclick="return confirm('Ban co chac muon xoa ko?')" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i></a></td>
                                 </tr> 
                             </tbody>

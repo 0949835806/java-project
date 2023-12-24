@@ -16,4 +16,6 @@ public interface UserService {
 	Optional<User> getById(Integer userid);
 	User saveAdmin(User user);
 	User findByUsername(String username);
+	Optional<User> findById(Integer id);
+	User findByEmail(String email);
 }

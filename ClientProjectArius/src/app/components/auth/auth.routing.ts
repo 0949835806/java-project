@@ -14,6 +14,7 @@ import { SigninComponent } from "./signin/signin.component";
 import { SignupComponent } from "./signup/signup.component";
 import { UserEditComponent } from "./user-edit/user-edit.component";
 import { WishListComponent } from "./wish-list/wish-list.component";
+import { AddressComponent } from "./address/address.component";
 
 export const AuthRoutes: Routes =  [
     {path: 'homePage', component: HomePageComponent},
@@ -30,5 +31,6 @@ export const AuthRoutes: Routes =  [
     {path: 'orderDetails/:id', component:OrderDetailsComponent},
     {path: 'about', component:AboutComponent},
     {path: 'contacts', component:ContactsComponent},
-    {path: 'wishList',component:WishListComponent}
+    {path: 'wishList',component:WishListComponent},
+    {path: 'address',component:AddressComponent}
 ]

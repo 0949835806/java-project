@@ -102,7 +102,7 @@
                           </tr>
                           <tr *ngFor="let c of cart"> 
                             <td class="checkout-image">
-                              <a routerLink="javascript:;"><img src="assets/img/photos/{{c.products.image}}" alt="{{c.products.proName}}"></a>
+                              <a routerLink="javascript:;"><img src={{c.products.image}} alt="{{c.products.proName}}"></a>
                             </td>
                             <td class="checkout-description">
                               <h3><a routerLink="javascript:;">{{c.products.proName}}</a></h3>

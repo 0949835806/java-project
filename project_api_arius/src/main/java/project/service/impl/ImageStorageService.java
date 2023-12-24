@@ -57,8 +57,10 @@ public class ImageStorageService implements IStorageService {
 
 			String fileExtension = FilenameUtils.getExtension(file.getOriginalFilename());
 			System.out.println(fileExtension);
-			String generatedfileName = UUID.randomUUID().toString().replace("-", "");
-			generatedfileName = generatedfileName + "." + fileExtension;
+			String generatedfileName = file.getOriginalFilename();
+			String configFileName;
+			configFileName = "require('../assets/" + generatedfileName +"')";
+			System.out.println(configFileName);
 			Path destinationFilePath = this.storageFolder.resolve(Paths.get(generatedfileName)).normalize()
 					.toAbsolutePath();
 			if (!destinationFilePath.getParent().equals(this.storageFolder.toAbsolutePath())) {
@@ -67,7 +69,7 @@ public class ImageStorageService implements IStorageService {
 			try (InputStream inputStream = file.getInputStream()) {
 				Files.copy(inputStream, destinationFilePath, StandardCopyOption.REPLACE_EXISTING);
 			}
-			return generatedfileName;
+			return configFileName;
 		} catch (IOException e) {
 			throw new RuntimeException("Failed to store", e);
 		}

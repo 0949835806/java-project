@@ -14,7 +14,7 @@ import project.repository.OrdersRepository;
 import project.service.OrdersService;
 
 @Service
-public class OrdersServiceImpl implements OrdersService{
+public class OrdersServiceImpl implements OrdersService {
 
 	@Autowired
 	private OrdersRepository ordersRepository;
@@ -54,6 +54,10 @@ public class OrdersServiceImpl implements OrdersService{
 	public Orders edit(Orders o) {
 		return ordersRepository.save(o);
 	}
-	
-	
+
+	@Override
+	public List<Orders> getOrderByUser(String username) {
+		return ordersRepository.getOrderByUser(username);
+	}
+
 }

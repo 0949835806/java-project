@@ -24,6 +24,7 @@ import { AboutComponent } from './about/about.component';
 import { ContactsComponent } from './contacts/contacts.component';
 import { WishListComponent } from './wish-list/wish-list.component';
 import { Ng2OrderModule } from 'ng2-order-pipe';
+import { AddressComponent } from './address/address.component';
 
 
 @NgModule({
@@ -45,7 +46,8 @@ import { Ng2OrderModule } from 'ng2-order-pipe';
     NavbarComponent,
     AboutComponent,
     ContactsComponent,
-    WishListComponent
+    WishListComponent,
+    AddressComponent
   ],
   imports: [
     CommonModule,

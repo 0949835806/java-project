@@ -5,6 +5,7 @@ import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -27,127 +28,99 @@ public class Orders {
 	@Column(name = "order_id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int orderid;
-	
-	
-	@Column(name = "dateOfset")
-	private Date dateofset;
-	
-	@Column(name = "delivery")
-	private boolean delivery;
-	
-	@Column(name = "note")
-	private String note;
-	
+
+	@Column(name = "paymentMethod")
+	private String paymentMethod;
+
+	@Column(name = "totalPrice")
+	private float totalPrice;
+
+	@ManyToOne
+	@JoinColumn(name = "address_id", referencedColumnName = "id")
+	private Address address;
+
 	@ManyToOne
 	@JoinColumn(name = "user_id", referencedColumnName = "user_id")
 	private User user;
-	
-	
-	@ManyToOne
-	@JoinColumn(name = "status_id",referencedColumnName = "status_id")
-	private StatusOrder status;
-	
-	@JsonIgnore
-	@OneToMany(mappedBy = "order")
-	private List<LineItems> lineItems;
 
-	
+	@ManyToOne
+	@JoinColumn(name = "status_id", referencedColumnName = "status_id")
+	private StatusOrder status;
+
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@JoinColumn(name = "order_id", referencedColumnName = "order_id")
+	private List<LineItems> lineItems = new ArrayList<>();
+
 	public Orders() {
 		// TODO Auto-generated constructor stub
 	}
 
-
-	public Orders(int orderid, Date dateofset, boolean delivery, String note, User user, StatusOrder status,
+	public Orders(int orderid, String paymentMethod, float totalPrice, Address address, User user, StatusOrder status,
 			List<LineItems> lineItems) {
 		super();
 		this.orderid = orderid;
-		this.dateofset = dateofset;
-		this.delivery = delivery;
-		this.note = note;
+		this.paymentMethod = paymentMethod;
+		this.totalPrice = totalPrice;
+		this.address = address;
 		this.user = user;
 		this.status = status;
 		this.lineItems = lineItems;
 	}
-
 
 	public int getOrderid() {
 		return orderid;
 	}
 
-
 	public void setOrderid(int orderid) {
 		this.orderid = orderid;
 	}
-
-
-	public Date getDateofset() {
-		return dateofset;
-	}
-
-
-	public void setDateofset(Date dateofset) {
-		this.dateofset = dateofset;
-	}
-
-
-
-
 
 	public User getUser() {
 		return user;
 	}
 
-
 	public void setUser(User user) {
 		this.user = user;
 	}
-
-
-
-	public String getNote() {
-		return note;
-	}
-
-
-
-
-	public void setNote(String note) {
-		this.note = note;
-	}
-
-	
-	
-	public boolean isDelivery() {
-		return delivery;
-	}
-
-
-	public void setDelivery(boolean delivery) {
-		this.delivery = delivery;
-	}
-
 
 	public StatusOrder getStatus() {
 		return status;
 	}
 
-
-
 	public void setStatus(StatusOrder status) {
 		this.status = status;
 	}
-
-
 
 	public List<LineItems> getLineItems() {
 		return lineItems;
 	}
 
-
-
 	public void setLineItems(List<LineItems> lineItems) {
 		this.lineItems = lineItems;
 	}
 
+	public String getPaymentMethod() {
+		return paymentMethod;
+	}
+
+	public void setPaymentMethod(String paymentMethod) {
+		this.paymentMethod = paymentMethod;
+	}
+
+	public float getTotalPrice() {
+		return totalPrice;
+	}
+
+	public void setTotalPrice(float totalPrice) {
+		this.totalPrice = totalPrice;
+	}
+
+	public Address getAddress() {
+		return address;
+	}
+
+	public void setAddress(Address address) {
+		this.address = address;
+	}
 
 }

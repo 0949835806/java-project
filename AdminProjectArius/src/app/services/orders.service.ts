@@ -18,8 +18,8 @@ export class OrdersService {
     return this.http.get<any>('http://localhost:8888/api/order/getOrderById/'+id);
   }
 
-  getStatusOrder():Observable<any>{
-    return this.http.get<any>('http://localhost:8888/api/order/getStatusOrder')
+  getStatusOrder(id:number):Observable<any>{
+    return this.http.get<any>('http://localhost:8888/api/order/getStatusOrderById/'+id)
   }
 
   deleteOrder(id:number):Observable<any>{
@@ -32,5 +32,9 @@ export class OrdersService {
 
   getStatusById(id:number):Observable<any>{
     return this.http.get<any>('http://localhost:8888/api/order/getStatusById/'+id);
+  }
+
+  addStatusHistory(data:any, id:number):Observable<any>{
+    return this.http.post<any>('http://localhost:8888/api/orderHistory/addHistory/'+id,data)
   }
 }

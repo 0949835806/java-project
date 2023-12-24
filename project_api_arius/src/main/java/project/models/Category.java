@@ -34,12 +34,19 @@ public class Category {
 	@NotEmpty(message = "tên danh mục không được để trống")
 	private String cateName;
 
+	@Column(name = "image", columnDefinition = "LONGTEXT")
+	private String image;
+
 	@Column(name = "status")
 	private boolean status;
 
 	@JsonIgnore
 	@OneToMany(mappedBy = "cateId")
 	private List<Product> listProduct;
+
+	@JsonIgnore
+	@OneToMany(mappedBy = "cate")
+	private List<LineItems> lineItems;
 
 	public int getCateId() {
 		return cateId;
@@ -73,17 +80,35 @@ public class Category {
 		this.listProduct = listProduct;
 	}
 
+	public String getImage() {
+		return image;
+	}
+
+	public void setImage(String image) {
+		this.image = image;
+	}
+
+	public List<LineItems> getLineItems() {
+		return lineItems;
+	}
+
+	public void setLineItems(List<LineItems> lineItems) {
+		this.lineItems = lineItems;
+	}
+
 	public Category() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Category(int cateId, @NotEmpty(message = "tên danh mục không được để trống") String cateName, boolean status,
-			List<Product> listProduct) {
+	public Category(int cateId, @NotEmpty(message = "tên danh mục không được để trống") String cateName, String image,
+			boolean status, List<Product> listProduct, List<LineItems> lineItems) {
 		super();
 		this.cateId = cateId;
 		this.cateName = cateName;
+		this.image = image;
 		this.status = status;
 		this.listProduct = listProduct;
+		this.lineItems = lineItems;
 	}
 
 }

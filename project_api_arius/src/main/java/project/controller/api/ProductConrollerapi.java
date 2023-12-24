@@ -6,6 +6,7 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -66,34 +67,39 @@ public class ProductConrollerapi {
 	}
 	
 	@PostMapping("/createProduct/{catId}")
-	public ResponseEntity<String> createProduct(@RequestBody @Valid Product product,BindingResult result, @PathVariable("catId") int catId) {
+	public ResponseEntity<?> createProduct(@RequestBody @Valid Product product,BindingResult result, @PathVariable("catId") int catId) {
 //		System.out.println(product.toString());
 		Category cat = categoryService.findById(catId).get();
 //		System.out.println(cat);
 		product.setCateId(cat);
 		if(result.hasErrors()) {
-			return ResponseEntity.status(400).body("Insert failed!");
+			return new ResponseEntity<Object>(HttpStatus.BAD_REQUEST, HttpStatus.BAD_REQUEST);
 		} else {
 			productService.save(product);
-			return ResponseEntity.ok("Product is valid");
+			return new ResponseEntity<Object>(product, HttpStatus.OK);
 		}
 	}
 	
 	@PutMapping("/editProduct/{catId}")
-	public ResponseEntity<String> editProduct(@Valid @RequestBody Product pro,@PathVariable("catId") int catId, BindingResult result){
+	public ResponseEntity<?> editProduct(@Valid @RequestBody Product pro,@PathVariable("catId") int catId, BindingResult result){
 		Category cat = categoryService.findById(catId).get();
 		System.out.println(cat);
 		pro.setCateId(cat);
 		if(result.hasErrors()) {
-			return ResponseEntity.status(400).body("Update failed!");
+			return new ResponseEntity<Object>(HttpStatus.BAD_REQUEST, HttpStatus.BAD_REQUEST);
 		} else {;
 			productService.save(pro);
-			return ResponseEntity.ok("Product is valid");
+			return new ResponseEntity<Object>(pro, HttpStatus.OK);
 		}
 	
 	}	
 	@DeleteMapping("/deleteProduct/{proId}")
 	public void deleteProduct(@PathVariable("proId")String proId) {
 		productService.deleteById(proId);
+	}
+	
+	@GetMapping("/searchProduct/{proName}")
+	public ResponseEntity<List<Product>> searchProduct(@PathVariable("proName") String proName){
+		return new ResponseEntity<List<Product>>(productService.findProName(proName), HttpStatus.OK);
 	}
 }

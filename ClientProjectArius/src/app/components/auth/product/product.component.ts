@@ -97,15 +97,22 @@ export class ProductComponent implements OnInit {
   }
 
   addToWishList(product:Product){
-    let wishlist={
-      products: product,
-      users: this.tokenPayload
+    this.isLoggedIn= !!this.auth.getToken();
+    if(!this.isLoggedIn){
+      alert("loggin to continue")
+      this.router.navigate(['/signin'])
+    }else {
+      let wishlist={
+        products: product,
+        users: this.tokenPayload
+      }
+      this.wishListService.saveWishList(wishlist).subscribe(data => {
+        console.log(data);
+        
+      });
+      this.notification.showSuccess("Add to wishlist successfull","Success");
     }
-    this.wishListService.saveWishList(wishlist).subscribe(data => {
-      console.log(data);
-      
-    });
-    this.notification.showSuccess("Add to wishlist successfull","Success");
+    
   }
 
   key: string= 'id'

@@ -68,7 +68,7 @@
                     <li style="float: left; list-style: none; position: relative; width: 216px; margin-right: 15px;" class="bx-clone" *ngFor="let p of product.slice(0, 5)">
                     <div class="product-item">
                       <div class="pi-img-wrapper">
-                        <img src="assets/img/photos/{{p.image}}" class="img-responsive" alt="Berry Lace Dress">
+                        <img src={{p.image}} class="img-responsive" alt="Berry Lace Dress">
                         <div>
                           <a routerLink="#" (click)="addToWishList(p)" class="btn btn-default fancybox-button">Like</a>
                           <a routerLink="/productDetails/{{p.proId}}" class="btn btn-default fancybox-fast-view">View</a>
@@ -112,9 +112,9 @@
                 <div class="bx-viewport" style="width: 100%;  position: relative; height: 332px;">
                   <ul class="bxslider" data-slides-phone="1" data-slides-tablet="2" data-slides-desktop="3" data-slide-margin="15" style="width: 815%; position: relative; transition-duration: 0s; ">
                     <li style="float: left; list-style: none; position: relative; width: 272.667px; margin-right: 15px;" class="bx-clone" *ngFor="let pt of threePro.slice(0, 3)">
-                  <div class="product-item">
+                  <div class="product-item" style="height: 386px;">
                     <div class="pi-img-wrapper">
-                      <img src="assets/img/photos/{{pt.image}}" class="img-responsive" alt="Berry Lace Dress">
+                      <img src={{pt.image}} class="img-responsive" alt="Berry Lace Dress">
                         <div>
                           <a routerLink="#" (click)="addToWishList(pt)" class="btn btn-default fancybox-button">Like</a>
                           <a routerLink="/productDetails/{{pt.proId}}" class="btn btn-default fancybox-fast-view">View</a>
@@ -144,9 +144,9 @@
                 <div class="bx-viewport" style="width: 100%;position: relative; height: 330px;">
                 <ul class="bxslider" data-slides-phone="1" data-slides-tablet="2" data-slides-desktop="2" data-slide-margin="15" style="width: 815%; position: relative;">
                   <li style="float: left; list-style: none; position: relative; width: 270px; margin-right: 15px;" class="bx-clone" *ngFor="let pp of twoPro.slice(0, 2)">
-                    <div class="product-item">
+                    <div class="product-item" style="height: 386px;">
                       <div class="pi-img-wrapper">
-                        <img src="assets/img/photos/{{pp.image}}" class="img-responsive" alt="Berry Lace Dress">
+                        <img src={{pp.image}} class="img-responsive" alt="Berry Lace Dress">
                         <div>
                           <a routerLink="#" (click)="addToWishList(pp)" class="btn btn-default fancybox-button">Like</a>
                           <a routerLink="/productDetails/{{pp.proId}}" class="btn btn-default fancybox-fast-view">View</a>

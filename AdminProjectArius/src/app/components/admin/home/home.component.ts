@@ -20,8 +20,6 @@ export class HomeComponent implements OnInit {
   tokenPayload: any;
   expirationDate: any;
   isLoggedIn = false;
-  showAdminBroad = false;
-  showAuthBroad= false;
   users: any;
   categories: any;
   products: any;
@@ -38,9 +36,6 @@ export class HomeComponent implements OnInit {
     if(this.isLoggedIn){
       const user = this.jwtHelper.decodeToken(this.token);
       this.roles  = user.roles;
-
-      this.showAdminBroad = this.roles.includes("ROLE_ADMIN");
-      this.showAuthBroad = this.roles.includes("ROLE_USER");
 
       this.username = user.sub;
     }

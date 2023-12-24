@@ -33,11 +33,11 @@
                                 <tr>
                                     <th (click)="sort('proId')" class="sorting sorting_asc" tabindex="0" aria-controls="datatables-fixed-header" rowspan="1" colspan="1" aria-label="Name: activate to sort column descending" style="width: 35.825px;" aria-sort="ascending">Order Id</th>
                                     <th  tabindex="0" aria-controls="datatables-fixed-header" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 297.875px;">Full Name</th>
-                                    <th  tabindex="0" aria-controls="datatables-fixed-header" rowspan="1" colspan="1" aria-label="Age: activate to sort column ascending" style="width: 97.7875px;">Email</th>
-                                    <th  tabindex="0" aria-controls="datatables-fixed-header" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending" style="width: 97.7875px;">Phone</th>
-                                    <th  tabindex="0" aria-controls="datatables-fixed-header" rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending" style="width: 97.7875px;">Address</th>
-                                    <th  tabindex="0" aria-controls="datatables-fixed-header" rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending" style="width: 260.875px;">Date of order</th>
-                                    <th  tabindex="0" aria-controls="datatables-fixed-header" rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending" style="width: 97.7875px;">Total</th>
+                                    <th  tabindex="0" aria-controls="datatables-fixed-header" rowspan="1" colspan="1" aria-label="Age: activate to sort column ascending" style="width: 97.7875px;">Phone</th>
+                                    <th  tabindex="0" aria-controls="datatables-fixed-header" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending" style="width: 97.7875px;">Adrress</th>
+                                    <th  tabindex="0" aria-controls="datatables-fixed-header" rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending" style="width: 97.7875px;">Street</th>
+                                    <th  tabindex="0" aria-controls="datatables-fixed-header" rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending" style="width: 97.875px;">Total price</th>
+                                    <th  tabindex="0" aria-controls="datatables-fixed-header" rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending" style="width: 97.7875px;">Payment</th>
                                     <th  tabindex="0" aria-controls="datatables-fixed-header" rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending" style="width: 297.7875px;">Status</th>
                                     <th>#</th>
                                 </tr>
@@ -51,30 +51,35 @@
                                     totalItems: count
                                   };
                             let i = index">
-                                    <td>{{o.orderid}}</td>
-                                    <td>{{o.user.fullName}}</td>
+                                    <td>{{(page-1)*tableSize + i+1}}</td>
+                                    <td>{{o.address.fullName}}</td>
                                     <td>
-                                        {{o.user.email}}
+                                        {{o.address.mobileNo}}
                                     </td>
-                                    <td>{{o.user.phone}}</td>
-                                    <td>{{o.user.address}}</td>
+                                    <td>{{o.address.name}}</td>
+                                    <td>{{o.address.street}}</td>
                                     <td>
-                                        {{o.dateofset | date:'dd/MM/yyyy'}}
+                                        {{o.totalPrice}}
                                     </td>
                                     <td>{{o.delivery?"Online":"Cash On Delivery"}}</td>
-                                    <td *ngIf="o.status.statusid ==1">
+                                    <td *ngIf="o.status.statusid ==1 || o.status.statusid ==2">
                                         <span style="color:blue ;">{{o.status.statusname}} </span>  
                                         </td>
-                                        <td *ngIf="o.status.statusid ==2">
+                                        <td *ngIf="o.status.statusid ==3">
                                           <span style="color: #F3A936;">{{o.status.statusname}} </span>  
                                         </td>
-                                          <td *ngIf="o.status.statusid ==3">
+                                          <td *ngIf="o.status.statusid ==4">
                                             <span style="color: green;">{{o.status.statusname}} </span>  
                                           </td>
-                                          <td *ngIf="o.status.statusid ==4">
+                                          <td *ngIf="o.status.statusid ==5">
                                             <span style="color: red;">{{o.status.statusname}} </span>  
                                           </td>
-                                    <td><a [routerLink]="['/admin/orderEdit/', o.orderid]" class="btn btn-sm btn-success"><i class="fa fa-pen-to-square"></i></a></td>
+                                    <td *ngIf="o.status.statusid < 4">
+                                        <a [routerLink]="['/admin/orderEdit/', o.orderid]" class="btn btn-sm btn-success">
+                                            <i class="fa fa-pen-to-square"></i>
+                                        </a>
+                                        
+                                    </td>
                                 </tr> 
                             </tbody>
                         </table>

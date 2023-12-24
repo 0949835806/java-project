@@ -22,6 +22,10 @@ export class UserService {
     return this.http.get<any>('http://localhost:8888/api/user/'+id);
   }
 
+  getUserByUsername(username:string):Observable<any>{
+    return this.http.get<any>('http://localhost:8888/api/user/findByUsername/'+username);
+  }
+
   getRoles():Observable<any>{
     return this.http.get<any>('http://localhost:8888/api/roles/');
   }

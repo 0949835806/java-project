@@ -37,7 +37,7 @@
                                     <th tabindex="0" rowspan="1" colspan="1"  style="width: 160.875px;">Name</th>
                                     <th tabindex="0" rowspan="1" colspan="1"  style="width: 55.825px;">Price</th>
                                     <th tabindex="0" rowspan="1" colspan="1" style="width: 55.825px;">Sale price</th>
-                                    <th tabindex="0" rowspan="1" colspan="1" style="width: 297.875px;">Description</th>
+                                    <th tabindex="0" rowspan="1" colspan="1" style="width: 297.875px; ">Description</th>
                                     <th tabindex="0" rowspan="1" colspan="1" style="width: 97.7875px;">Image</th>
                                     <th tabindex="0" rowspan="1" colspan="1" style="width: 97.7875px;">Category</th>
                                     <th tabindex="0" rowspan="1" colspan="1"  style="width: 97.7875px;">Status</th>
@@ -53,12 +53,12 @@
                                     totalItems: count
                                   };
                             let i = index">
-                                    <td>{{pro.proId}}</td>
+                                    <td>{{(page-1)*tableSize + i+1}}</td>
                                     <td>{{pro.proName}}</td>
                                     <td>{{pro.price}}</td>
                                     <td>{{pro.sale_price}}</td>
-                                    <td class="descipcss">{{pro.description}}</td>
-                                    <td><img src="assets/img/photos/{{pro.image}}" alt="" srcset="" width="60px" height="60px"> </td>
+                                    <td style="overflow-wrap: anywhere;">{{pro.description}}</td>
+                                    <td><img src={{pro.image}} alt="" srcset="" width="60px" height="60px"> </td>
                                     <td>{{pro.cateId.cateName}}</td>
                                     <td>{{pro.status==true ? "In Stock":"Out of stock"}}</td>
                                     <td><a [routerLink]="['/admin/productEdit/', pro.proId]" class="btn btn-sm btn-success"><i class="fa fa-pen-to-square"></i></a></td>

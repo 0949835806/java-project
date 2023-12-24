@@ -30,7 +30,7 @@
                 <h2>Bestsellers</h2>
                 <div class="item" *ngFor="let ps of productSale.slice(0, 3)">
                   <a routerLink="/productDetails/{{ps.proId}}">
-                    <img src="assets/img/photos/{{ps.image}}" class="img-responsive" alt="Berry Lace Dress">
+                    <img src={{ps.image}} class="img-responsive" alt="Berry Lace Dress">
                     </a>
                     <h3><a routerLink="/productDetails/{{ps.proId}}">{{ps.proName}}</a></h3>
                   <div class="price">${{ps.sale_price}}</div>
@@ -65,17 +65,20 @@
                     totalItems: count
                   };
             let i = index">
-                  <div class="product-item" >
+                  <div class="product-item" style="height: 386px;">
                     <div class="pi-img-wrapper">
-                        <img src="assets/img/photos/{{pro.image}}" class="img-responsive" alt="Berry Lace Dress">
+                        <img src={{pro.image}} class="img-responsive" alt="Berry Lace Dress">
                         <div>
                           <a routerLink="#" (click)="addToWishList(pro)" class="btn btn-default fancybox-button">Like</a>
                           <a routerLink="/productDetails/{{pro.proId}}" class="btn btn-default fancybox-fast-view">View</a>
                         </div>
                     </div>
                     <h3><a routerLink="/productDetails/{{pro.proId}}">{{pro.proName}}</a></h3>
-                    <div class="pi-price">${{pro.sale_price}}</div>
-                    <a routerLink="#" class="btn btn-default add2cart" (click)="addToCart(pro)">Add to cart</a>
+                    <div class="card card-body">
+                      <div class="pi-price">${{pro.sale_price}}</div>
+                      <a routerLink="#" class="btn btn-default add2cart" (click)="addToCart(pro)">Add to cart</a>
+                    </div>
+                    
                   </div>
                 </div>
                 <!-- PRODUCT ITEM END -->

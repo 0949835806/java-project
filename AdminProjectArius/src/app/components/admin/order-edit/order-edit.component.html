@@ -19,13 +19,13 @@
                         <input type="text" class="form-control" name="orderid" readonly placeholder="Order id" [(ngModel)]="order.orderid" >
                     </div>
                     <div class="mb-3">
-                        <label class="form-label">Full Name:</label>
-                        <input type="text" class="form-control" name="fullName" readonly placeholder="Full name" [(ngModel)]="order.fullName">
+                        <label class="form-label">Total price:</label>
+                        <input type="text" class="form-control" name="fullName" readonly placeholder="Full name" [(ngModel)]="order.totalPrice"/>
                     </div>
                     <div class="row">
                         <div class="mb-3 col-md-6">
-                            <label class="form-label" for="inputEmail4">Email:</label>
-                            <input type="email" class="form-control" name="email"readonly  placeholder="Email"  [(ngModel)]="email">
+                            <label class="form-label" for="inputEmail4">Full Name:</label>
+                            <input type="email" class="form-control" name="email"readonly  placeholder="Email"  [(ngModel)]="fullName">
                         </div>
                         <div class="mb-3 col-md-6">
                             <label class="form-label" for="inputPassword4">Phone:</label>
@@ -35,22 +35,12 @@
                     <div class="row">
                         <div class="mb-3 col-md-6">
                             <label class="form-label" for="inputEmail4">Address:</label>
-                            <input type="text" class="form-control" name="address" readonly placeholder="Address"[(ngModel)]="address">
+                            <input type="text" class="form-control" name="address" readonly placeholder="Address"[(ngModel)]="name">
                         </div>
                         <div class="mb-3 col-md-6">
                             <label class="form-label" for="inputPassword4">Note:</label>
-                            <input type="text" class="form-control" name="note" readonly placeholder="Note" [(ngModel)]="order.note">
+                            <input type="text" class="form-control" name="note" readonly placeholder="Note" [(ngModel)]="street">
                         </div>
-                    </div>
-                    <div class="row">
-                        <label class="form-label" for="inputEmail4">Delivery:</label>
-                        <div *ngIf="order.delivery ==true">
-                            <input type="text" class="form-control" readonly value="Online">
-                        </div>
-                        <div *ngIf="order.delivery ==false">
-                            <input type="text" class="form-control" readonly value="Cash On Delivery">
-                            
-                         </div>
                     </div>
                     <div class="mb-3">
                         <label class="form-label" for="inputPassword4">Status:</label>

@@ -14,7 +14,7 @@
                     <tr>
                       <th class="shopping-cart-image">Image:</th>
                        <td class="shopping-cart-ref-no" *ngFor="let c of ordersdetails">
-                        <img src="assets/img/photos/{{c.product.image}}" alt="" width="120px" height="120px">
+                        <img src={{c.product.image}} alt="" width="120px" height="120px">
                       </td>
                     </tr>
                     <tr>

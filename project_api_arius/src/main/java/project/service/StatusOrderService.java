@@ -15,4 +15,6 @@ public interface StatusOrderService {
 
 	StatusOrder save(StatusOrder so);
 
+	List<StatusOrder> findByStatusIdGreaterThanEqual(int statusid);
+
 }
