@@ -3,6 +3,7 @@ package project.controller.api;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -62,5 +63,11 @@ public class AddressController {
 	@DeleteMapping("/deleteAddress/{addressId}")
 	public void deleteAddress(@PathVariable("addressId") Integer addressId){
 		addressService.deleteById(addressId);
+	}
+
+	@GetMapping("/getAddressById/{addressId}")
+	public ResponseEntity<Object> getAddressById(@PathVariable("addressId") int addressId){
+		Address address = addressService.findById(addressId).get();
+		return ResponseEntity.ok(address);
 	}
 }

@@ -25,7 +25,13 @@ import { ContactsComponent } from './contacts/contacts.component';
 import { WishListComponent } from './wish-list/wish-list.component';
 import { Ng2OrderModule } from 'ng2-order-pipe';
 import { AddressComponent } from './address/address.component';
-
+import { LayoutModule } from "@progress/kendo-angular-layout";
+import { IconsModule } from "@progress/kendo-angular-icons";
+import { ButtonsModule } from "@progress/kendo-angular-buttons";
+import { InputsModule } from "@progress/kendo-angular-inputs";
+import { LabelModule } from "@progress/kendo-angular-label";
+import { DropDownsModule } from "@progress/kendo-angular-dropdowns";
+import { AddressEditComponent } from './address-edit/address-edit.component';
 
 @NgModule({
   declarations: [
@@ -47,7 +53,8 @@ import { AddressComponent } from './address/address.component';
     AboutComponent,
     ContactsComponent,
     WishListComponent,
-    AddressComponent
+    AddressComponent,
+    AddressEditComponent
   ],
   imports: [
     CommonModule,
@@ -56,7 +63,13 @@ import { AddressComponent } from './address/address.component';
     HttpClientModule,
     ReactiveFormsModule,
     NgxPaginationModule, 
-    Ng2OrderModule
+    Ng2OrderModule,
+    LayoutModule,
+    IconsModule,
+    ButtonsModule,
+    InputsModule,
+    LabelModule,
+    DropDownsModule
   ]
 })
 export class AuthModule { }

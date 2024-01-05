@@ -62,13 +62,9 @@ export class CategoryCreateComponent implements OnInit {
       next: (value) => {
         console.log("Insert successfull: ", value);
         this.notification.showSuccess("Insert category successfull", "Success");
-        this.router.navigate(["/admin/category"]);
-      },
-      error: (err) => {
-        console.log("Error: ", err);
-        this.invalidCategory = true;
-        this.notification.showError("Insert category failed!", "Error");
-      },
+        
+      }
     })
+    this.router.navigate(["/admin/category"]);
   }
 }

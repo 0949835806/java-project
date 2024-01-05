@@ -20,100 +20,70 @@
 
         <!-- BEGIN CONTENT -->
         <div class="col-md-9 col-sm-9">
-          <h1>Adresss</h1>
+          <h1>Adresss book</h1>
           <div class="content-form-page">
             <div class="row">
-              <div class="col-md-7 col-sm-7">
-                <form class="form-horizontal form-without-legend"   >
-                    <!-- <div *ngIf="invalidRegister" class="alert alert-danger">User already exists / register user failed.</div> -->
-                    <div class="form-group">
-                    <label for="email" class="col-lg-4 control-label">Address name: <span class="require">*</span></label>
-                    <div class="col-lg-8">
-                      <input type="text" id="name" name="name" ngModel class="form-control" placeholder="User Name" required autofocus minlength="5" #name="ngModel">
-                      <div [hidden]="name.valid || name.pristine "
-                          class="alert alert-danger">
-                          User name is required, at least 5 characters
-                      </div>
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <label for="email" class="col-lg-4 control-label">Full name: <span class="require">*</span></label>
-                    <div class="col-lg-8">
-                      <input type="text" id="fullName" name="fullName" ngModel class="form-control" placeholder="Full Name" required autofocus minlength="5" #fullname="ngModel">
-                      <div [hidden]="fullname.valid || fullname.pristine "
-                          class="alert alert-danger">
-                          Full name is required, at least 5 characters
-                      </div>
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <label for="email" class="col-lg-4 control-label">Nation: <span class="require">*</span></label>
-                    <div class="col-lg-8">
-                      <input type="text" id="landmark" name="landmark" ngModel class="form-control" placeholder="Enter your email" required email autofocus #email="ngModel">
-                      <div [hidden]="email.valid || email.pristine "
-                          class="alert alert-danger">
-                          Email is required
-                      </div>
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <label for="email" class="col-lg-4 control-label">Area: <span class="require">*</span></label>
-                    <div class="col-lg-8">
-                      <input type="text" id="houseNo" name="houseNo" ngModel class="form-control" placeholder="Enter your houseNo" required autofocus #address="ngModel">
-                      <div [hidden]="address.valid || address.pristine "
-                          class="alert alert-danger">
-                          Address is required
-                      </div>
-                    </div>
-                  </div>
+              <form #addressForm="ngForm" (ngSubmit)="addAddress(addressForm.value)">
+                <table id='table1' class="table table-bordered">
+                  <thead>
+                    <tr>
+                      <th>Address Name</th>
+                      <th>Full Name</th>
+                      <th>Nation</th>
+                      <th>Area</th>
+                      <th>Street</th>
+                      <th>Phone</th>
+                      <th>Postal code</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let a of address">
+                      <td>{{a.name}}</td>
+                      <td>{{a.fullName}}</td>
+                      <td>{{a.landmark}}</td>
+                      <td>{{a.houseNo}}</td>
+                      <td>{{a.street}}</td>
+                      <td>{{a.mobileNo}}</td>
+                      <td>{{a.postalCode}}</td>
+                      <td>
+                        <a href="javascript:void()"(click)="deleteAddress(a.id)" onclick="return confirm('Ban co chac muon xoa ko?')" class="btn btn-block">X</a>
+                      </td>
+                    </tr>
+                  </tbody>
+                  <tfoot>
+                    <tr>
+                      <td>
+                        <input type="text" id="name" name="name" ngModel class="form-control" placeholder="Name" required #name="ngModel">
+                      </td>
+                      <td>
+                        <input type="text" id="fullName" name="fullName" ngModel class="form-control" placeholder="Full Name" required minlength="5" #fullname="ngModel">
+                      </td>
+                      <td>
+                        <input type="text" id="landmark" name="landmark" ngModel class="form-control" placeholder="Nation" required #landmark="ngModel">
+                      </td>
+                      <td>
+                        <input type="text" id="houseNo" name="houseNo" ngModel class="form-control" placeholder="Area" required #houseNo="ngModel">
+                      </td>
+                      <td>
+                        <input type="text" id="street" name="street" ngModel class="form-control" placeholder="Street" required #street="ngModel">
+                      </td>
+                      <td>
+                        <input type="text" id="mobileNo" name="mobileNo" ngModel class="form-control" placeholder="mobileNo" required pattern="^[0-9\-\+]{9,15}$" #mobileNo="ngModel">
+                      </td>
+                      <td>
+                        <input type="number" class="form-control" id="postalCode" name="postalCode" ngModel placeholder="Postal" required #postalCode="ngModel">
+                      </td>
+                      
+                      <td>
+                        <div class="text-center">
+                          <button type="submit" [disabled]="!addressForm.valid"  class="btn btn-primary" >Add</button>
+                        </div>
+                      </td>
+                    </tr>
+                  </tfoot>
+                </table>
+              </form>
 
-                  <div class="form-group">
-                    <label for="email" class="col-lg-4 control-label">Street: <span class="require">*</span></label>
-                    <div class="col-lg-8">
-                      <input type="text" id="street" name="street" ngModel class="form-control" placeholder="Enter your street" required autofocus #address="ngModel">
-                      <div [hidden]="address.valid || address.pristine "
-                          class="alert alert-danger">
-                          Address is required
-                      </div>
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <label for="email" class="col-lg-4 control-label">Phone: <span class="require">*</span></label>
-                    <div class="col-lg-8">
-                      <input type="text" id="phone" name="phone" ngModel class="form-control" placeholder="Enter your phone number" required autofocus pattern="^[0-9\-\+]{9,15}$" #phone="ngModel">
-                      <div [hidden]="phone.valid || phone.pristine "
-                          class="alert alert-danger">
-                          Phone is required
-                      </div>
-                    </div>
-                  </div>
-                  
-                  <div class="form-group">
-                    <label for="password" class="col-lg-4 control-label">Post code: <span class="require">*</span></label>
-                    <div class="col-lg-8">
-                      <input type="number" class="form-control" id="postalCode" name="postalCode" ngModel placeholder="postalCode" required #password="ngModel">
-                      <div [hidden]="password.valid || password.pristine "
-                          class="alert alert-danger">
-                          Password is required
-                      </div>
-                    </div>
-                  </div>
-                  
-                  <div class="row">
-                    <div class="col-lg-8 col-md-offset-4 padding-left-0 padding-top-20">
-                      <button type="submit"   class="btn btn-primary" >Add address</button>
-                    </div>
-                  </div>
-                </form>
-              </div>  
-              <div class="col-md-4 col-sm-4 pull-right">
-                <div class="form-info">
-                  <h2><em>Important</em> Information</h2>
-                  <p>Duis autem vel eum iriure at dolor vulputate velit esse vel molestie at dolore.</p>
-
-                  <button type="button" class="btn btn-default" >More details</button>
-                </div>
-              </div>
             </div>
           </div>
         </div>

@@ -44,10 +44,6 @@ public class Category {
 	@OneToMany(mappedBy = "cateId")
 	private List<Product> listProduct;
 
-	@JsonIgnore
-	@OneToMany(mappedBy = "cate")
-	private List<LineItems> lineItems;
-
 	public int getCateId() {
 		return cateId;
 	}
@@ -88,27 +84,19 @@ public class Category {
 		this.image = image;
 	}
 
-	public List<LineItems> getLineItems() {
-		return lineItems;
-	}
-
-	public void setLineItems(List<LineItems> lineItems) {
-		this.lineItems = lineItems;
-	}
 
 	public Category() {
 		// TODO Auto-generated constructor stub
 	}
 
 	public Category(int cateId, @NotEmpty(message = "tên danh mục không được để trống") String cateName, String image,
-			boolean status, List<Product> listProduct, List<LineItems> lineItems) {
+			boolean status, List<Product> listProduct) {
 		super();
 		this.cateId = cateId;
 		this.cateName = cateName;
 		this.image = image;
 		this.status = status;
 		this.listProduct = listProduct;
-		this.lineItems = lineItems;
 	}
 
 }

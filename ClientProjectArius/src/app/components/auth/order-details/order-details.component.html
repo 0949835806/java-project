@@ -1,80 +1,82 @@
-
 <app-pre-header></app-pre-header>
 <div class="main">
-    <div class="container">
-      <!-- BEGIN SIDEBAR & CONTENT -->
-      <div class="row margin-bottom-40">
-        <!-- BEGIN CONTENT -->
-        <div class="col-md-12 col-sm-12">
-          <h1>Order details</h1>
-          <div class="shopping-cart-page">
-            <div class="shopping-cart-data clearfix">
+  <div class="container">
+    <!-- BEGIN SIDEBAR & CONTENT -->
+    <div class="row margin-bottom-40">
+      <!-- BEGIN CONTENT -->
+      <div class="col-md-12 col-sm-12">
+        <h1>Order details</h1>
+        <div class="shopping-cart-page">
+          <div class="shopping-cart-data clearfix">
+            <div class="row mb-top">
+              <div class="col-md-6 col-sm-6">
+                <a  routerLink="/purcharse" ><i class="fa fa-arrow-left"></i>&nbsp; BACK</a>
+              </div>
+              <div class="col-md-6 col-sm-6">
+                <div class="pull-right">
+                  <h2 class="active">{{orders.orderid}}  |  {{status}}</h2>
+                </div>
+              </div>
+            </div>
+            <hr>
+            <div class="mb-top">
+              <kendo-stepper [steps]="steps" stepType="full" [(currentStep)]="current" [linear]="false"
+                [style.width.px]="970">
+              </kendo-stepper>
+            </div>
+            <div class="col-md-12 clearfix">
               <div class="table-wrapper-responsive">
-                <table summary="Shopping cart">
-                    <tr>
-                      <th class="shopping-cart-image">Image:</th>
-                       <td class="shopping-cart-ref-no" *ngFor="let c of ordersdetails">
-                        <img src={{c.product.image}} alt="" width="120px" height="120px">
-                      </td>
-                    </tr>
-                    <tr>
-                      <th class="shopping-cart-description">Product name:</th>
-                      <td class="shopping-cart-ref-no" *ngFor="let c of ordersdetails">
-                       {{c.product.proName}}
-                     </td>
-                    </tr>
-                    <tr>
-                      <th class="shopping-cart-description">Full name:</th>
-                       <td class="shopping-cart-ref-no">
-                        {{fullName}}
-                      </td>
-                    </tr>
-                    <tr>
-                      <th class="shopping-cart-ref-no">Address:</th>
-                      <td >
-                        <div>
-                            {{address}}
-                        </div>
-                      </td>
-                    </tr>
-                    <tr>
-                      <th class="shopping-cart-ref-no">Phone:</th>
-                        <td class="shopping-cart-ref-no">
-                            {{phone}}
-                        </td>
-                    </tr>
-                    <tr>
-                      <th class="shopping-cart-quantity">Date of order</th>
-                      <td class="shopping-cart-ref-no">
-                        {{orders.dateofset | date:'dd/MM/yyyy'}}
-                      </td>
-                    </tr>
-                    <tr>
-                      <th class="shopping-cart-ref-no">Status: </th>
-                      <td class="shopping-cart-ref-no" *ngIf="status.statusid ==1">
-                        <span style="color:blue ;">{{status.statusname}} </span>  
-                        </td>
-                        <td class="shopping-cart-ref-no" *ngIf="status.statusid ==2">
-                          <span style="color: #F3A936;">{{status.statusname}} </span>  
-                        </td>
-                          <td class="shopping-cart-ref-no" *ngIf="status.statusid ==3">
-                            <span style="color: green;">{{status.statusname}} </span>  
-                          </td>
-                          <td *ngIf="status.statusid ==4">
-                            <span style="color: red;">{{status.statusname}} </span>  
-                          </td>
-                    </tr>
-                    <tr>
-                      <div class="form-actions"> 
-                        <td>                          
-                           <button type="button" class="btn default" (click)="back()">Back</button>  
-                        </td> 
-                        <td>
-                           <button type="submit" (click)="onDelete()"onclick="return confirm('Are you sure cacncel order?')" class="btn red">Cancel order</button> 
-                        </td>                                
-                        </div>
-                    </tr>
-                  </table>
+                <table>
+                  <tr>
+                    <th class="checkout-image">Image</th>
+                    <th class="checkout-description">Description</th>
+                    <th class="checkout-model">Model</th>
+                    <th class="checkout-quantity">Quantity</th>
+                    <th class="checkout-price">Price</th>
+                    <th class="checkout-total">Total</th>
+                  </tr>
+                  <tr *ngFor="let c of ordersdetails">
+                    <td class="checkout-image">
+                      <a routerLink="javascript:;"><img src={{c.product.image}} alt="{{c.product.proName}}"></a>
+                    </td>
+                    <td class="checkout-description">
+                      <h3><a routerLink="javascript:;">{{c.product.proName}}</a></h3>
+                    </td>
+                    <td class="checkout-model">{{c.product.proId}}</td>
+                    <td class="checkout-quantity">{{c.subtotal}}</td>
+                    <td class="checkout-price"><strong><span>$</span>{{c.product.sale_price}}</strong></td>
+                    <td class="checkout-total"><strong><span>$</span>{{c.subtotal * c.product.sale_price}}</strong>
+                    </td>
+                  </tr>
+                </table>
+              </div>
+              <div class="checkout-total-block">
+                <ul>
+                  <li>
+                    <em>Sub total</em>
+                    <strong class="price"><span>$</span>{{total}}</strong>
+                  </li>
+                  <li>
+                    <em>Shipping cost</em>
+                    <strong class="price"><span>$</span>3.00</strong>
+                  </li>
+                  <li>
+                    <em>VAT (17.5%)</em>
+                    <strong class="price"><span>$</span>3.00</strong>
+                  </li>
+                  <li class="checkout-total-price">
+                    <em>Total</em>
+                    <strong class="price" #myTotalElem><span>$</span>{{order.totalPrice}}</strong>
+                  </li>
+                  <li>
+                    <em>Payment method</em>
+                    <strong>{{order.paymentMethod}}</strong>
+                  </li>
+                </ul>
+              </div>
+              <div class="clearfix"></div>
+              <button class="btn btn-primary pull-right"*ngIf="isCancelOrder" type="submit" (click)="onDelete()"onclick="return confirm('Are you sure cacncel order?')" 
+                id="button-confirm">Cancel order</button>
               </div>
           </div>
         </div>
@@ -83,5 +85,4 @@
       <!-- END SIDEBAR & CONTENT -->
     </div>
   </div>
-<app-pre-footer></app-pre-footer>
-
+  <app-pre-footer></app-pre-footer>

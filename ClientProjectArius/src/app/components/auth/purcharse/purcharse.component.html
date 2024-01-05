@@ -13,10 +13,8 @@
               <table summary="Shopping cart">
                 <tr>
                   <th class="shopping-cart-image">Order id:</th>
-                  <th class="shopping-cart-description">Full name:</th>
-                  <th class="shopping-cart-description">Phone:</th>
                   <th class="shopping-cart-description">Address:</th>
-                  <th class="shopping-cart-quantity">Date of order</th>
+                  <th class="shopping-cart-description">Total:</th>
                   <th class="shopping-cart-price">Delivery</th>
                   <th class="shopping-cart-price">Status</th>
                   <th class="shopping-cart-total">Details</th>
@@ -26,16 +24,13 @@
                     {{o.orderid}}
                   </td>
                   <td class="shopping-cart-ref-no">
-                    {{o.user.fullName}}
+                    {{o.address.name}}
                   </td>
                   <td class="shopping-cart-ref-no">
-                    {{o.user.phone}}
+                    {{o.totalPrice}}
                   </td>
                   <td class="shopping-cart-ref-no">
-                    {{o.user.address}}
-                  </td>
-                  <td class="shopping-cart-ref-no">
-                    {{o.dateofset | date:'dd/MM/yyyy'}}
+                    {{o.delivery?"Online":"Cash On Delivery"}}
                   </td>
                   <td class="shopping-cart-ref-no" *ngIf="o.delivery ==true">
                     <span style="color: red;">Online </span>  

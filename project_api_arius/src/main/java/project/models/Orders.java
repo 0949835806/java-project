@@ -47,8 +47,8 @@ public class Orders {
 	@JoinColumn(name = "status_id", referencedColumnName = "status_id")
 	private StatusOrder status;
 
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	@JoinColumn(name = "order_id", referencedColumnName = "order_id")
+	@OneToMany(mappedBy = "order")
+	@JsonIgnore
 	private List<LineItems> lineItems = new ArrayList<>();
 
 	public Orders() {

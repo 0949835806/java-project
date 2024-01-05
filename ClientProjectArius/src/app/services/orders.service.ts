@@ -10,8 +10,8 @@ export class OrdersService {
 
   constructor(private http: HttpClient) { }
 
-  insertOrder(data: any):Observable<any>{
-    return this.http.post<any>('http://localhost:8888/api/order/saveOrder',data);
+  insertOrder(username: string, data: any):Observable<any>{
+    return this.http.post<any>('http://localhost:8888/api/order/saveOrder/'+username,data);
   }
   getOrder():Observable<any>{
     return this.http.get<any>('http://localhost:8888/api/order');
@@ -43,6 +43,10 @@ export class OrdersService {
 
   getOrderDetails(id:number):Observable<any>{
     return this.http.get<any>('http://localhost:8888/api/order/getLineItemsByOrder/'+id);
+  }
+
+  getOrderIdLastest():Observable<any>{
+    return this.http.get<any>('http://localhost:8888/api/order/getLatestId');
   }
 
 }

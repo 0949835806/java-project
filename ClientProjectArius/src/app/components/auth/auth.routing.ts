@@ -15,6 +15,7 @@ import { SignupComponent } from "./signup/signup.component";
 import { UserEditComponent } from "./user-edit/user-edit.component";
 import { WishListComponent } from "./wish-list/wish-list.component";
 import { AddressComponent } from "./address/address.component";
+import { AddressEditComponent } from "./address-edit/address-edit.component";
 
 export const AuthRoutes: Routes =  [
     {path: 'homePage', component: HomePageComponent},
@@ -32,5 +33,6 @@ export const AuthRoutes: Routes =  [
     {path: 'about', component:AboutComponent},
     {path: 'contacts', component:ContactsComponent},
     {path: 'wishList',component:WishListComponent},
-    {path: 'address',component:AddressComponent}
+    {path: 'address',component:AddressComponent},
+    {path: 'addressEdit/:id',component:AddressEditComponent}
 ]

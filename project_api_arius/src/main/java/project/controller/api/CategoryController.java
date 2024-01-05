@@ -27,8 +27,8 @@ import project.service.CategoryService;
 
 @RestController
 @RequestMapping("/api/category")
-@CrossOrigin("http://10.0.2.2:8081")
-//@CrossOrigin("http://localhost:4200")
+//@CrossOrigin("http://10.0.2.2:8081")
+@CrossOrigin("http://localhost:4300")
 public class CategoryController {
 
 	@Autowired

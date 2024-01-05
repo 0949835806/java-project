@@ -42,7 +42,7 @@ public class Product {
 	@Column(name = "offer")
 	private String offer;
 
-	@Column(name = "description")
+	@Column(name = "description", columnDefinition = "LONGTEXT")
 	private String description;
 
 	@Column(name = "image", columnDefinition = "LONGTEXT")
@@ -63,9 +63,9 @@ public class Product {
 	@JsonIgnore
 	private List<WishList> wishlist;
 
-	@OneToMany(mappedBy = "productCart")
+	@OneToMany(mappedBy = "product")
 	@JsonIgnore
-	private List<Cart> cart;
+	private List<LineItems> lineItems;
 
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	@JoinColumn(name = "pro_id", referencedColumnName = "pro_id")
@@ -159,12 +159,13 @@ public class Product {
 		this.wishlist = wishlist;
 	}
 
-	public List<Cart> getCart() {
-		return cart;
+
+	public List<LineItems> getLineItems() {
+		return lineItems;
 	}
 
-	public void setCart(List<Cart> cart) {
-		this.cart = cart;
+	public void setLineItems(List<LineItems> lineItems) {
+		this.lineItems = lineItems;
 	}
 
 	public String getColor() {
@@ -197,7 +198,7 @@ public class Product {
 
 	public Product(String proId, String proName, float price, float sale_price, String color, String size, String offer,
 			String description, String image, boolean status, Category cateId, List<Comment> comment,
-			List<WishList> wishlist, List<Cart> cart, List<ImagesProduct> carouselImages) {
+			List<WishList> wishlist, List<LineItems> lineItems, List<ImagesProduct> carouselImages) {
 		super();
 		this.proId = proId;
 		this.proName = proName;
@@ -212,7 +213,7 @@ public class Product {
 		this.cateId = cateId;
 		this.comment = comment;
 		this.wishlist = wishlist;
-		this.cart = cart;
+		this.lineItems = lineItems;
 		this.carouselImages = carouselImages;
 	}
 

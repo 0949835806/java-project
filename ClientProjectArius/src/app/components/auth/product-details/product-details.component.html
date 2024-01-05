@@ -23,7 +23,7 @@
             <h2>Bestsellers</h2>
             <div class="item" *ngFor="let ps of productSaler.slice(0, 3)">
               <a routerLink="/productDetails/{{ps.proId}}">
-                <img src="assets/img/photos/{{ps.image}}" class="img-responsive" alt="Berry Lace Dress">
+                <img src={{ps.image}} class="img-responsive" alt="Berry Lace Dress">
                 </a>
                 <h3><a routerLink="/productDetails/{{ps.proId}}">{{ps.proName}}</a></h3>
               <div class="price">${{ps.sale_price}}</div>

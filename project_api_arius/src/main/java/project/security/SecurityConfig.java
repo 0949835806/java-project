@@ -43,10 +43,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		http.cors().and().csrf().disable();
 		http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 		http.authorizeRequests().antMatchers("/api/login/**", "/api/token/refresh/**","/api/user/**","/api/address/**","/api/order/**").permitAll();
-		http.authorizeRequests().antMatchers(HttpMethod.GET, "/api/user/**","/api/category/**","/api/product/**","/api/comment/**","/api/cart/**","/api/address/**","/api/order/**","/api/orderHistory/**").permitAll();
+		http.authorizeRequests().antMatchers(HttpMethod.GET, "/api/user/**","/api/category/**","/api/product/**","/api/comment/**","/api/address/**","/api/order/**","/api/orderHistory/**").permitAll();
 		http.authorizeRequests().antMatchers(HttpMethod.POST, "/api/uploads/**","/api/product/createProduct/**","/api/category/createCategory").hasAnyAuthority("ROLE_ADMIN");
 		http.authorizeRequests().antMatchers(HttpMethod.PUT, "/api/product/editProduct/**","/api/category/editCategory/**","/api/order/**","/api/user/**").hasAnyAuthority("ROLE_ADMIN");
-		http.authorizeRequests().antMatchers(HttpMethod.DELETE,"/api/product/deleteProduct/**","/api/category/**","/api/cart/deleteCartById/**","/api/user/**").hasAnyAuthority("ROLE_ADMIN");
+		http.authorizeRequests().antMatchers(HttpMethod.DELETE,"/api/product/deleteProduct/**","/api/category/**","/api/user/**").hasAnyAuthority("ROLE_ADMIN");
 		http.authorizeRequests().anyRequest().authenticated();
 		http.addFilter(customAuthenticationFilter);
 		http.addFilterBefore(new CustomAuthorizationFilter(), UsernamePasswordAuthenticationFilter.class);

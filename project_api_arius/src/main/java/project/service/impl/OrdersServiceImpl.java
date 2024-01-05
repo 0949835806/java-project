@@ -60,4 +60,9 @@ public class OrdersServiceImpl implements OrdersService {
 		return ordersRepository.getOrderByUser(username);
 	}
 
+	@Override
+	public Integer findLatestOrderId() {
+		return ordersRepository.findLatestOrderId();
+	}
+
 }

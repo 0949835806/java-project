@@ -18,9 +18,17 @@ export class SignupComponent implements OnInit {
   }
 
   register(user:User){
-    this.http.post(environment.baseUrl + "user/save",user).subscribe(data=>{
-      console.log(data);
-      this.notification.showSuccess("Register successfull","Success");
+    this.http.post(environment.baseUrl + "user/save",user).subscribe({
+      next: (value) =>{
+        this.notification.showSuccess("Register successfull", "Success");
+        this.router.navigate(["/signin"]);
+      },
+      error: (err) => {
+        console.log("Error: ", err);
+        this.notification.showError("Register failed", "Error");
+        this.invalidRegister = true;
+      },
+      complete: () => console.info('Login complete')
     })
     this.router.navigate(["/signin"]);
   }

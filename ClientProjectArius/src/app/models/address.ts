@@ -5,7 +5,7 @@ export class Address {
     fullName!: string;
     name!: string;
     landmark!: string;
-    phone!: string;
+    mobileNo!: string;
     houseNo!:string;
     street!: string;
     postalCode!: number;

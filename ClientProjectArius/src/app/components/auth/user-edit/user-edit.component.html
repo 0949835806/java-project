@@ -35,42 +35,12 @@
                     </div>
                   </div>
                   <div class="form-group">
-                    <label for="email" class="col-lg-4 control-label">Full name: <span class="require">*</span></label>
-                    <div class="col-lg-8">
-                      <input type="text" id="fullName" name="fullName" ngModel class="form-control" placeholder="Full Name"[(ngModel)]="users.fullName" required #fullname="ngModel">
-                      <div [hidden]="fullname.valid || fullname.pristine "
-                          class="alert alert-danger">
-                          Full name is required, at least 5 characters
-                      </div>
-                    </div>
-                  </div>
-                  <div class="form-group">
                     <label for="email" class="col-lg-4 control-label">Email: <span class="require">*</span></label>
                     <div class="col-lg-8">
                       <input type="email" id="email" name="email"  class="form-control" placeholder="Enter your email" [(ngModel)]="users.email" required email #email="ngModel">
                       <div [hidden]="email.valid || email.pristine "
                           class="alert alert-danger">
                           Email is required
-                      </div>
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <label for="email" class="col-lg-4 control-label">Address: <span class="require">*</span></label>
-                    <div class="col-lg-8">
-                      <input type="text" id="address" name="address"  class="form-control" placeholder="Enter your address" [(ngModel)]="users.address" required #address="ngModel"> 
-                      <div [hidden]="address.valid || address.pristine "
-                          class="alert alert-danger">
-                          Address is required
-                      </div>
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <label for="email" class="col-lg-4 control-label">Phone: <span class="require">*</span></label>
-                    <div class="col-lg-8">
-                      <input type="text" id="phone" name="phone"  class="form-control" placeholder="Enter your phone number" [(ngModel)]="users.phone" required pattern="^[0-9\-\+]{9,15}$" #phone="ngModel">
-                      <div [hidden]="phone.valid || phone.pristine "
-                          class="alert alert-danger">
-                          Phone is required
                       </div>
                     </div>
                   </div>

@@ -19,10 +19,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import project.models.LineItems;
 import project.models.OrderHistory;
 import project.models.Orders;
 import project.models.StatusOrder;
 import project.models.User;
+import project.service.LineItemsService;
 import project.service.OrderHistoryService;
 import project.service.OrdersService;
 import project.service.StatusOrderService;
@@ -43,6 +45,9 @@ public class OrdersController {
 	
 	@Autowired
 	private OrderHistoryService historyService;
+	
+	@Autowired
+	private LineItemsService lineItemService;
 
 	@InitBinder
 	public void initBinder(WebDataBinder binder) {
@@ -113,4 +118,31 @@ public class OrdersController {
 		ordersService.deleteById(orderid);
 	}
 
+	@GetMapping("/getLineItemsByOrder/{orderid}")
+	public ResponseEntity<List<LineItems>> getLineItems(@PathVariable("orderid")Integer orderid){
+		List<LineItems> ltByOrder = lineItemService.getLineItemsByOrder(orderid);
+		return ResponseEntity.ok(ltByOrder);
+	}
+	
+	@PostMapping("/saveLineItems")
+	public ResponseEntity<?> saveLineItems(@RequestBody LineItems lineItems){
+		try {
+			lineItemService.save(lineItems);
+			return ResponseEntity.ok(200);
+		} catch (Exception e) {
+			// TODO: handle exception
+			return ResponseEntity.status(400).body("Insert failed!");
+		}
+	}
+	
+	@GetMapping("/getLatestId")
+	public ResponseEntity<Integer> getLatestId(){
+		Integer orderIdLastest = ordersService.findLatestOrderId();
+		if(orderIdLastest != null) {
+			return new ResponseEntity<Integer>(orderIdLastest, HttpStatus.OK);
+		}else {
+			return new ResponseEntity<Integer>(1, HttpStatus.OK);
+		}
+		
+	}
 }

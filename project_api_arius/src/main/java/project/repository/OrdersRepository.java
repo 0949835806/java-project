@@ -13,4 +13,8 @@ public interface OrdersRepository extends JpaRepository<Orders, Integer>{
 
 	@Query("SELECT o FROM Orders o WHERE o.user.username = ?1")
 	List<Orders> getOrderByUser(String username);
+	
+	@Query("SELECT MAX(o.orderid) FROM Orders o")
+	Integer findLatestOrderId();
+	
 }

@@ -23,4 +23,6 @@ public interface OrdersService {
 
 	List<Orders> getOrderByUser(String username);
 
+	Integer findLatestOrderId();
+
 }

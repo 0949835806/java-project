@@ -83,7 +83,6 @@ export class ProductCreateComponent implements OnInit {
     }
     product.carouselImages = this.listCarouselImages
     product.image =this.imageProduct;
-    console.log(product.carouselImages);
     
     this.productService.create(product, this.myCateElem.nativeElement.value).subscribe({
       next: (value) => {
@@ -98,8 +97,6 @@ export class ProductCreateComponent implements OnInit {
       
     })
     
-    
-    this.router.navigate(["/admin/product"]);
   }
 
   

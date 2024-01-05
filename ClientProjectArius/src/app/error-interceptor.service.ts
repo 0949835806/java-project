@@ -10,7 +10,7 @@ export class ErrorInterceptorService implements HttpInterceptor{
   constructor(private router: Router) { }
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     return next.handle(req).pipe(catchError(err => {
-      if (err.status === 401) {
+      if (err.status === 403) {
           // auto login if 403 response returned from api
           this.router.navigate(['/signin'])
           // alert("login is continue");

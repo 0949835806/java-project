@@ -6,11 +6,11 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
-import project.models.Cart;
+import project.models.LineItems;
 
 @Repository
-public interface CartRepository extends JpaRepository<Cart, Integer>{
+public interface LineItemsRepository extends JpaRepository<LineItems, Integer>{
 
-	@Query("SELECT c FROM Cart c WHERE c.productCart.proId = ?1")
-	List<Cart> getCartByProId(String proId);
+	@Query("SELECT lt FROM LineItems lt WHERE lt.order.orderid = ?1")
+	List<LineItems> getLineItemsByOrder(int orderid);
 }

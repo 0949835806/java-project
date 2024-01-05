@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { AuthGuard } from 'src/app/guard/auth-guard.service';
 import { CartService } from 'src/app/services/cart.service';
 import { CategogoryService } from 'src/app/services/categogory.service';
 
@@ -16,7 +18,8 @@ export class NavbarComponent implements OnInit {
   subtoto: number =0;
   isCart= false;
   category: Array<any> = [];
-  constructor(private categoryService:CategogoryService, private cartService: CartService) { }
+  isLoggedIn = false;
+  constructor(private categoryService:CategogoryService, private cartService: CartService,private authGuard: AuthGuard,private router:Router) { }
 
   ngOnInit(): void {
     this.categoryService.getListCategory().subscribe(data => {
@@ -43,5 +46,15 @@ export class NavbarComponent implements OnInit {
   onDelete(product:any){
     this.cartService.deleteItem(product);
     window.location.reload();
+  }
+
+  checkoutCart(){
+    this.isLoggedIn= !!this.authGuard.getToken();
+    if(!this.isLoggedIn){
+      alert("loggin to continue")
+      this.router.navigate(['/signin'])
+    }else {
+      this.router.navigate(['/checkout'])
+    }
   }
 }

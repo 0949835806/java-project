@@ -31,11 +31,8 @@ export class UserEditComponent implements OnInit {
     this.userService.getUserById(this.id).subscribe(data =>{
       this.users.userid= data.userid;
       this.users.username= data.username;
-      this.users.fullName=data.fullName;
       this.users.password=data.password;
       this.users.email= data.email;
-      this.users.phone= data.phone;
-      this.users.address= data.address;
       console.log(data)
     })
   }
