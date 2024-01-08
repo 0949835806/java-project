@@ -17,6 +17,8 @@ export class AddressComponent implements OnInit {
 
   token: any;
   address: Array<any> = [];
+  editCache: { [key: string]: any } = {};
+  isEdit =false;
   constructor(private router: Router, private http: HttpClient, private notification: NotificationService, private addressService: AddressService,
     private authGuard: AuthGuard, private authService: AuthService,  private jwtHelper :JwtHelperService) { }
 
@@ -27,10 +29,44 @@ export class AddressComponent implements OnInit {
       console.log("Data address: ",data);
       
       this.address = data
+      this.updateEditCache(data);
+      
     })
+    
   }
 
+  startEdit(id: string): void {
+    this.editCache[id].edit = true;
+    this.isEdit= true;
+  }
 
+  cancelEdit(id: string): void {
+    const index = this.address.findIndex(item => item.id === id);
+    this.editCache[id] = {
+      data: { ...this.address[index] },
+      edit: false
+    };
+    this.isEdit= false;
+  }
+
+  saveEdit(id: string): void {
+    const index = this.address.findIndex(item => item.id === id);
+    console.log("index :",index);
+    console.log("data edit: ", this.editCache[id].data);
+    this.onUpdate( this.editCache[id].data);
+    Object.assign(this.address[index], this.editCache[id].data);
+    this.editCache[id].edit = false;
+    this.isEdit= false;
+  }
+
+  updateEditCache(data:any[]) {
+    data.forEach(item => {
+      this.editCache[item.id] = {
+        edit: false,
+        data: { ...item }
+      };
+    });
+  }
 
   addAddress(address: Address) {
     this.token = this.authGuard.getToken();
@@ -38,6 +74,22 @@ export class AddressComponent implements OnInit {
     this.addressService.insert(user.sub, address).subscribe(data => {
       console.log(data);
       this.notification.showSuccess("Register successfull","Success");
+    })
+    window.location.reload();
+  }
+
+  onUpdate(address: Address){
+    this.token = this.authGuard.getToken();
+    const user = this.jwtHelper.decodeToken(this.token);
+    this.addressService.update(user.sub, address).subscribe(
+    {
+      next: (success) =>{
+        this.notification.showSuccess("Update successfull","Success");
+        window.location.reload();
+      },
+      error:(err) => {
+        this.notification.showError("Update failed!","Error");
+      }
     })
     window.location.reload();
   }

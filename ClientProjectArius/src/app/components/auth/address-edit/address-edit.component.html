@@ -25,6 +25,7 @@
                 <form class="form-horizontal form-without-legend" method="post" #formEdit="ngForm" (ngSubmit)="onUpdate(formEdit.value)" >
                     
                   <div class="form-group">
+                    <input type="hidden" class="form-control" id="id" name="id"  placeholder="id" [(ngModel)]="address.id">
                     <label for="email" class="col-lg-4 control-label">Name: <span class="require">*</span></label>
                     <div class="col-lg-8">
                       <input type="text" id="name" name="name" ngModel class="form-control" placeholder="Name"[(ngModel)]="address.name" required #name="ngModel">

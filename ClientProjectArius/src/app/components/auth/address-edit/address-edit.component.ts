@@ -33,9 +33,11 @@ export class AddressEditComponent implements OnInit {
   }
 
   onUpdate(address: Address){
+    console.log(address);
     this.token = this.authGuard.getToken();
     const user = this.jwtHelper.decodeToken(this.token);
-    this.addressService.update(address, user.sub).subscribe(
+    console.log("User name: ",user.sub);
+    this.addressService.update(user.sub, address).subscribe(
       {
         next: (success) =>{
           this.notification.showSuccess("Update successfull","Success");
