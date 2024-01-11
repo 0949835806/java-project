@@ -39,8 +39,20 @@
             <div class="row">
               <div class="col-md-6 col-sm-6">
                 <div class="product-main-image">
-                  <img src={{product.image}} alt="Cool green dress with red bell" class="img-responsive" data-BigImgsrc="assets/pages/img/products/model7.jpg">
+                  <div class="carousel slide" data-ride="carousel" id="single-product-slider">
+                    <div class="carousel-inner">
+                      <div class="carousel-item">
+                        <img src={{product.image}} alt="" id="preview">
+                      </div>
+                    </div>
+                    
+                  </div>
                 </div>
+                <div class="product-other-images">
+                    <a href="javascript:void(0)" class="fancybox-button" *ngFor="let img of product.carouselImages"[class.active]="imgId == img.imgId" (click)="imageChange(img.name, img.imgId)">
+                      <img src={{img.name}} #imageCarousel>
+                    </a>             
+               </div>
               </div>
               <div class="col-md-6 col-sm-6" *ngIf="product">
                 <h1>{{product.proName}}</h1>

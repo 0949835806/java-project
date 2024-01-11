@@ -44,7 +44,7 @@
                           {{a.name}}
                         </ng-container>
                         <ng-template #nameInputTpl>
-                          <input type="text" name="name" [(ngModel)]="editCache[a.id].data.name" #name="ngModel"/>
+                          <input type="text" class="form-control" name="name" [(ngModel)]="editCache[a.id].data.name" #name="ngModel"/>
                         </ng-template>
                       </td>
                       <td>
@@ -52,21 +52,21 @@
                           {{a.fullName}}
                         </ng-container>
                         <ng-template #fullNameInputTpl>
-                          <input type="text" name="fullName" [(ngModel)]="editCache[a.id].data.fullName" #fullName="ngModel"/>
+                          <input type="text" class="form-control" name="fullName" [(ngModel)]="editCache[a.id].data.fullName" #fullName="ngModel"/>
                         </ng-template>
                       </td>
                       <td><ng-container *ngIf="!editCache[a.id].edit; else landmarkInputTpl">
                         {{a.landmark}}
                       </ng-container>
                       <ng-template #landmarkInputTpl>
-                        <input type="text" name="landmark" [(ngModel)]="editCache[a.id].data.landmark" #landmark="ngModel" />
+                        <input type="text" class="form-control" name="landmark" [(ngModel)]="editCache[a.id].data.landmark" #landmark="ngModel" />
                       </ng-template>
                     </td>
                       <td><ng-container *ngIf="!editCache[a.id].edit; else houseNoInputTpl">
                         {{a.houseNo}}
                       </ng-container>
                       <ng-template #houseNoInputTpl>
-                        <input type="text" name="houseNo" [(ngModel)]="editCache[a.id].data.houseNo" #houseNo="ngModel" />
+                        <input type="text" class="form-control" name="houseNo" [(ngModel)]="editCache[a.id].data.houseNo" #houseNo="ngModel" />
                       </ng-template>
                     </td>
                       <td>
@@ -74,7 +74,7 @@
                         {{a.street}}
                       </ng-container>
                       <ng-template #streetInputTpl>
-                        <input type="text" name="street" [(ngModel)]="editCache[a.id].data.street" #street="ngModel" />
+                        <input type="text" class="form-control" name="street" [(ngModel)]="editCache[a.id].data.street" #street="ngModel" />
                       </ng-template>
                     </td>
                       <td>
@@ -82,14 +82,14 @@
                         {{a.mobileNo}}
                       </ng-container>
                       <ng-template #mobileNoInputTpl>
-                        <input type="text" name="mobileNo" [(ngModel)]="editCache[a.id].data.mobileNo" #mobileNo="ngModel" />
+                        <input type="text" class="form-control" name="mobileNo" [(ngModel)]="editCache[a.id].data.mobileNo" #mobileNo="ngModel" />
                       </ng-template>
                     </td>
                       <td><ng-container *ngIf="!editCache[a.id].edit; else postalCodeInputTpl">
                         {{a.postalCode}}
                       </ng-container>
                       <ng-template #postalCodeInputTpl>
-                        <input type="number" name="postalCode" [(ngModel)]="editCache[a.id].data.postalCode" #postalCode="ngModel" />
+                        <input type="number"class="form-control" name="postalCode" [(ngModel)]="editCache[a.id].data.postalCode" #postalCode="ngModel" />
                       </ng-template>
                     </td>
                       <td>

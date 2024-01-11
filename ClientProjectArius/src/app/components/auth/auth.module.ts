@@ -30,8 +30,8 @@ import { IconsModule } from "@progress/kendo-angular-icons";
 import { ButtonsModule } from "@progress/kendo-angular-buttons";
 import { InputsModule } from "@progress/kendo-angular-inputs";
 import { LabelModule } from "@progress/kendo-angular-label";
-import { DropDownsModule } from "@progress/kendo-angular-dropdowns";
 import { AddressEditComponent } from './address-edit/address-edit.component';
+import { DropDownsModule } from '@progress/kendo-angular-dropdowns';
 
 @NgModule({
   declarations: [
@@ -54,7 +54,8 @@ import { AddressEditComponent } from './address-edit/address-edit.component';
     ContactsComponent,
     WishListComponent,
     AddressComponent,
-    AddressEditComponent
+    AddressEditComponent,
+    
   ],
   imports: [
     CommonModule,

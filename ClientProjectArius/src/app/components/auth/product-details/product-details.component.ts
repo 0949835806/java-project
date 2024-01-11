@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, Directive, ElementRef, HostListener, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { JwtHelperService } from '@auth0/angular-jwt';
@@ -33,7 +33,9 @@ export class ProductDetailsComponent implements OnInit {
   productSaler : Array<any> = [];
   productByCateId: any;
   isLoggedIn =false;
+  imgId!: number;
   @ViewChild("myCateElem") myCateElem!: ElementRef;
+  @ViewChild("imageCarousel") imageCarousel!: ElementRef;
   constructor(private productService: ProductService, private routex: ActivatedRoute,private categoryService: CategogoryService,
     private cartService: CartService,private notification:NotificationService, private authGuard:AuthGuard,private router:Router, 
     private authService:AuthService, private jwtHelper: JwtHelperService, private commentService:CommentService,private wishListService: WishlistService) {
@@ -148,4 +150,11 @@ export class ProductDetailsComponent implements OnInit {
     }
     
   }
+  imageChange(src:any, id: number){
+    var prev:any = document.getElementById("preview");
+    prev.src =src;
+    prev.alt = id;
+    this.imgId = id;
+  }
+
 }
